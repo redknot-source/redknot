@@ -135,6 +135,7 @@
   on('click', '.navbar .dropdown > a', function(e) {
     if (select('#navbar').classList.contains('navbar-mobile')) {
       e.preventDefault()
+      e.stopPropagation()
       
       // Close other dropdowns
       const allDropdowns = select('.navbar .dropdown', true)
@@ -148,7 +149,10 @@
       
       // Toggle current dropdown
       this.parentElement.classList.toggle('dropdown-active')
-      this.nextElementSibling.classList.toggle('dropdown-active')
+      const menu = this.nextElementSibling
+      if (menu) {
+        menu.classList.toggle('dropdown-active')
+      }
     }
   }, true)
 
@@ -233,6 +237,14 @@
               mobileToggle.classList.remove('bi-x');
               mobileToggle.classList.add('bi-list');
             }
+            
+            // Close all dropdowns
+            const allDropdowns = select('.navbar .dropdown', true);
+            allDropdowns.forEach(dropdown => {
+              dropdown.classList.remove('dropdown-active');
+              const menu = dropdown.querySelector('.dropdown-menu');
+              if (menu) menu.classList.remove('dropdown-active');
+            });
           }
         });
       });

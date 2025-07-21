@@ -200,16 +200,18 @@ h1, h2, h3, h4, h5, h6 {
   visibility: hidden;
   transform: translateY(-10px);
   transition: all 0.3s ease;
-  z-index: 1000;
+  z-index: 9999;
   border: 1px solid rgba(45, 55, 72, 0.1);
   display: flex;
   flex-direction: column;
+  pointer-events: none;
 }
 
 .navbar .dropdown:hover .dropdown-menu {
   opacity: 1;
   visibility: visible;
   transform: translateY(0);
+  pointer-events: auto;
 }
 
 .navbar .dropdown-menu li {
@@ -236,6 +238,27 @@ h1, h2, h3, h4, h5, h6 {
 
 .navbar .dropdown-menu li:not(:last-child) {
   border-bottom: 1px solid rgba(45, 55, 72, 0.05);
+}
+
+/* Focus states for accessibility */
+.navbar .dropdown-toggle:focus {
+  outline: 2px solid var(--uae-gold);
+  outline-offset: 2px;
+}
+
+.navbar .dropdown-menu a:focus {
+  outline: 2px solid var(--uae-gold);
+  outline-offset: -2px;
+  background: rgba(182, 138, 53, 0.1);
+  color: var(--uae-gold);
+}
+
+/* Ensure dropdown stays open on focus within */
+.navbar .dropdown:focus-within .dropdown-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  pointer-events: auto;
 }
 
 /*--------------------------------------------------------------
@@ -350,6 +373,8 @@ h1, h2, h3, h4, h5, h6 {
 .navbar-mobile ul li.dropdown.dropdown-active ul {
   display: block !important;
   animation: slideDown 0.3s ease;
+  opacity: 1;
+  visibility: visible;
 }
 
 @keyframes slideDown {
@@ -369,13 +394,14 @@ h1, h2, h3, h4, h5, h6 {
 
 .navbar-mobile ul li.dropdown .dropdown-toggle::after {
   content: '\f107';
-  font-family: 'Font Awesome 5 Free';
+  font-family: 'Font Awesome 6 Free', 'Font Awesome 5 Free';
   font-weight: 900;
   position: absolute;
   right: 15px;
   top: 50%;
   transform: translateY(-50%);
   transition: transform 0.3s ease;
+  font-size: 12px;
 }
 
 .navbar-mobile ul li.dropdown.dropdown-active .dropdown-toggle::after {
