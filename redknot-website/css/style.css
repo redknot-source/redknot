@@ -246,6 +246,17 @@ h1, h2, h3, h4, h5, h6 {
   outline-offset: 2px;
 }
 
+/* Mobile navigation toggle accessibility */
+.mobile-nav-toggle:focus {
+  outline: 2px solid var(--uae-gold);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 3px rgba(182, 138, 53, 0.3);
+}
+
+.mobile-nav-toggle:active {
+  transform: scale(0.95);
+}
+
 .navbar .dropdown-menu a:focus {
   outline: 2px solid var(--uae-gold);
   outline-offset: -2px;
@@ -271,6 +282,10 @@ h1, h2, h3, h4, h5, h6 {
   display: none;
   line-height: 0;
   transition: 0.5s;
+  position: relative;
+  z-index: 1002;
+  -webkit-user-select: none;
+  user-select: none;
 }
 
 /* Mobile Navigation Active State */
@@ -413,18 +428,28 @@ h1, h2, h3, h4, h5, h6 {
 
 @media (max-width: 991px) {
   .mobile-nav-toggle {
-    display: block;
+    display: flex !important;
     color: #ffffff;
-    font-size: 24px;
-    padding: 8px;
-    border-radius: 6px;
-    background: rgba(182, 138, 53, 0.1);
-    border: 1px solid rgba(182, 138, 53, 0.3);
+    font-size: 28px;
+    padding: 12px;
+    border-radius: 8px;
+    background: rgba(182, 138, 53, 0.15);
+    border: 2px solid rgba(182, 138, 53, 0.4);
+    min-width: 48px;
+    min-height: 48px;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    z-index: 1001;
+    transition: all 0.3s ease;
   }
 
-  .mobile-nav-toggle:hover {
-    background: rgba(182, 138, 53, 0.2);
+  .mobile-nav-toggle:hover,
+  .mobile-nav-toggle:focus {
+    background: rgba(182, 138, 53, 0.25);
     color: #b68a35;
+    border-color: rgba(182, 138, 53, 0.6);
+    transform: scale(1.05);
   }
 
   .navbar ul {
@@ -433,7 +458,18 @@ h1, h2, h3, h4, h5, h6 {
   
   /* Ensure navbar doesn't overlap content */
   .header {
-    padding: 15px 0;
+    padding: 12px 0;
+  }
+  
+  /* Ensure proper spacing for mobile navigation */
+  .header .container-fluid {
+    padding: 0 15px;
+  }
+  
+  /* Make sure logo doesn't interfere with hamburger */
+  .header .logo img {
+    max-height: 40px;
+    width: auto;
   }
   
   /* Add padding to prevent content from hiding behind fixed header */
@@ -1198,6 +1234,27 @@ section {
 }
 
 @media (max-width: 576px) {
+  /* Mobile Portrait Navigation Fixes */
+  .header {
+    padding: 8px 0;
+  }
+  
+  .header .container-fluid {
+    padding: 0 10px;
+  }
+  
+  .mobile-nav-toggle {
+    font-size: 24px !important;
+    min-width: 44px !important;
+    min-height: 44px !important;
+    padding: 10px !important;
+    margin-left: 8px;
+  }
+  
+  .header .logo img {
+    max-height: 35px;
+  }
+  
   .hero-video h1,
   .hero-content h1 {
     font-size: 28px;
