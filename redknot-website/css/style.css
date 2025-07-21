@@ -1810,3 +1810,585 @@ textarea:focus {
     opacity: 0.7;
   }
 } 
+
+/*--------------------------------------------------------------
+# Skilled Migration Page Styles
+--------------------------------------------------------------*/
+
+/* Page Title Section */
+.page-title {
+  padding: 140px 0 80px 0;
+  background: linear-gradient(135deg, var(--slate-100) 0%, var(--pure-white) 100%);
+  text-align: center;
+}
+
+.page-title h1 {
+  font-size: 3rem;
+  font-weight: 700;
+  color: var(--uae-blue);
+  margin-bottom: 20px;
+}
+
+.page-title p {
+  font-size: 1.2rem;
+  color: var(--slate-600);
+  margin-bottom: 30px;
+}
+
+.breadcrumbs {
+  margin-top: 20px;
+}
+
+.breadcrumbs ol {
+  display: flex;
+  justify-content: center;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.breadcrumbs ol li {
+  margin: 0 5px;
+}
+
+.breadcrumbs ol li a {
+  color: var(--uae-blue);
+  text-decoration: none;
+}
+
+.breadcrumbs ol li:not(:last-child)::after {
+  content: ' / ';
+  color: var(--slate-400);
+  margin-left: 10px;
+}
+
+/* Optimized Skilled Migration Section */
+.skilled-migration-optimized {
+  padding: 60px 0 40px 0;
+  min-height: calc(100vh - 120px);
+}
+
+/* Combined Page Header */
+.page-header-combined {
+  margin-bottom: 40px;
+  padding: 0 0 30px 0;
+}
+
+.page-header-combined h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--uae-blue);
+  margin: 20px 0 15px 0;
+}
+
+.page-header-combined .lead {
+  font-size: 1.1rem;
+  color: var(--slate-600);
+  margin-bottom: 25px;
+}
+
+.page-header-combined .destinations-heading {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--charcoal);
+  margin: 0;
+}
+
+/* Breadcrumbs Optimization */
+.breadcrumbs {
+  margin-bottom: 15px;
+}
+
+.breadcrumbs ol {
+  display: flex;
+  justify-content: center;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+/* Optimized Tabs Container */
+.tabs-container-optimized {
+  display: flex;
+  gap: 20px;
+  height: calc(100vh - 400px);
+  min-height: 600px;
+  max-height: 700px;
+}
+
+/* Country Sidebar with Scroll */
+.country-sidebar {
+  flex: 0 0 280px;
+  width: 280px;
+}
+
+.country-nav-pills-scrollable {
+  background: var(--pure-white);
+  border-radius: 10px;
+  box-shadow: 0 5px 30px rgba(0, 0, 0, 0.1);
+  padding: 15px 0;
+  height: 100%;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--slate-300) transparent;
+}
+
+.country-nav-pills-scrollable::-webkit-scrollbar {
+  width: 6px;
+}
+
+.country-nav-pills-scrollable::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.country-nav-pills-scrollable::-webkit-scrollbar-thumb {
+  background-color: var(--slate-300);
+  border-radius: 3px;
+}
+
+.country-nav-pills-scrollable::-webkit-scrollbar-thumb:hover {
+  background-color: var(--slate-400);
+}
+
+.country-nav-pills .nav-pills {
+  border: none;
+}
+
+.country-nav-pills .nav-link {
+  display: flex;
+  align-items: center;
+  padding: 15px 25px;
+  color: var(--slate-600);
+  background: transparent;
+  border: none;
+  border-radius: 8px;
+  margin: 5px 15px;
+  text-align: left;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  border-left: 3px solid transparent;
+}
+
+.country-nav-pills .nav-link i {
+  margin-right: 12px;
+  font-size: 1.1rem;
+  width: 20px;
+}
+
+.country-nav-pills .nav-link:hover {
+  background: var(--slate-50);
+  color: var(--uae-blue);
+  border-left-color: var(--uae-blue);
+  transform: translateX(5px);
+}
+
+.country-nav-pills .nav-link.active {
+  background: linear-gradient(135deg, var(--uae-blue) 0%, #0a5dbf 100%);
+  color: var(--pure-white);
+  border-left-color: var(--uae-gold);
+  box-shadow: 0 4px 15px rgba(10, 76, 150, 0.3);
+}
+
+.country-nav-pills .nav-link.disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.country-nav-pills .nav-link.disabled:hover {
+  transform: none;
+  background: transparent;
+  border-left-color: transparent;
+}
+
+/* Content Area with Scroll */
+.content-area {
+  flex: 1;
+  min-width: 0;
+}
+
+.tab-content-scrollable {
+  background: var(--pure-white);
+  border-radius: 10px;
+  box-shadow: 0 5px 30px rgba(0, 0, 0, 0.1);
+  padding: 25px;
+  height: 100%;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--slate-300) transparent;
+}
+
+.tab-content-scrollable::-webkit-scrollbar {
+  width: 8px;
+}
+
+.tab-content-scrollable::-webkit-scrollbar-track {
+  background: var(--slate-50);
+  border-radius: 4px;
+}
+
+.tab-content-scrollable::-webkit-scrollbar-thumb {
+  background-color: var(--slate-400);
+  border-radius: 4px;
+}
+
+.tab-content-scrollable::-webkit-scrollbar-thumb:hover {
+  background-color: var(--slate-500);
+}
+
+/* Country Content Area */
+.country-content {
+  height: 100%;
+  padding: 0;
+}
+
+.country-header h3 {
+  color: var(--charcoal);
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 15px;
+}
+
+.country-header .lead {
+  font-size: 1.1rem;
+  color: var(--slate-600);
+  line-height: 1.7;
+  margin-bottom: 30px;
+}
+
+/* Australia Horizontal Subtabs */
+.australia-subtabs {
+  margin-top: 30px;
+}
+
+.australia-subtabs .nav-tabs {
+  border-bottom: 2px solid var(--slate-200);
+  margin-bottom: 0;
+}
+
+.australia-subtabs .nav-tabs .nav-link {
+  border: none;
+  border-bottom: 3px solid transparent;
+  color: var(--slate-600);
+  font-weight: 600;
+  padding: 15px 25px;
+  background: transparent;
+  transition: all 0.3s ease;
+}
+
+.australia-subtabs .nav-tabs .nav-link:hover {
+  border-bottom-color: var(--uae-gold);
+  color: var(--uae-blue);
+}
+
+.australia-subtabs .nav-tabs .nav-link.active {
+  color: var(--uae-blue);
+  border-bottom-color: var(--uae-blue);
+  background: var(--slate-50);
+}
+
+/* Visa Content Sections */
+.visa-content {
+  padding-top: 20px;
+}
+
+.visa-header h4 {
+  color: var(--charcoal);
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 15px;
+}
+
+.visa-header p {
+  color: var(--slate-600);
+  line-height: 1.7;
+  margin-bottom: 30px;
+}
+
+/* Benefits, Eligibility, and Other Sections */
+.benefits-section,
+.eligibility-section,
+.processing-time,
+.why-choose,
+.process-overview {
+  margin-bottom: 30px;
+}
+
+.benefits-section h5,
+.eligibility-section h5,
+.processing-time h5,
+.why-choose h5,
+.process-overview h5 {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 15px;
+  display: flex;
+  align-items: center;
+}
+
+.benefits-list,
+.eligibility-list {
+  list-style: none;
+  padding-left: 0;
+}
+
+.benefits-list li,
+.eligibility-list li {
+  padding: 8px 0;
+  padding-left: 25px;
+  position: relative;
+  color: var(--slate-600);
+  line-height: 1.6;
+}
+
+.benefits-list li::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  top: 8px;
+  color: var(--success);
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+
+.eligibility-list li::before {
+  content: '•';
+  position: absolute;
+  left: 0;
+  top: 8px;
+  color: var(--uae-blue);
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+.process-steps {
+  padding-left: 20px;
+}
+
+.process-steps li {
+  margin-bottom: 10px;
+  color: var(--slate-600);
+  line-height: 1.6;
+}
+
+/* CTA Section */
+.cta-section {
+  background: linear-gradient(135deg, var(--slate-50) 0%, var(--pure-white) 100%);
+  border-radius: 8px;
+  padding: 25px;
+  border-left: 4px solid var(--uae-gold);
+  margin-top: 30px;
+}
+
+.cta-section h6 {
+  color: var(--charcoal);
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.cta-section p {
+  color: var(--slate-600);
+  margin-bottom: 15px;
+}
+
+/* Additional Programs */
+.additional-programs {
+  border-top: 1px solid var(--slate-200);
+  padding-top: 30px;
+}
+
+.program-card {
+  background: var(--slate-50);
+  padding: 20px;
+  border-radius: 8px;
+  height: 100%;
+  border-left: 3px solid var(--uae-blue);
+}
+
+.program-card h6 {
+  color: var(--charcoal);
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.program-card p {
+  color: var(--slate-600);
+  margin-bottom: 0;
+  font-size: 0.95rem;
+}
+
+/* Call to Action Section */
+.cta-section.py-5 {
+  margin-top: 80px;
+}
+
+/* Mobile Responsive Design */
+@media (max-width: 992px) {
+  .tabs-container-optimized {
+    flex-direction: column;
+    height: auto;
+  }
+  
+  .country-sidebar {
+    flex: none;
+    width: 100%;
+    margin-bottom: 20px;
+  }
+  
+  .country-nav-pills-scrollable {
+    height: 200px;
+    padding: 10px 0;
+  }
+  
+  .country-nav-pills-scrollable .nav-pills {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+    padding: 0 15px;
+  }
+  
+  .country-nav-pills-scrollable .nav-link {
+    margin: 0;
+    padding: 8px 12px;
+    font-size: 0.85rem;
+    border-radius: 20px;
+    white-space: nowrap;
+  }
+  
+  .content-area {
+    flex: none;
+  }
+  
+  .tab-content-scrollable {
+    height: 500px;
+    padding: 20px;
+  }
+  
+  .page-header-combined h1 {
+    font-size: 2rem;
+  }
+  
+  .skilled-migration-optimized {
+    padding: 40px 0 20px 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .country-nav-pills-scrollable .nav-pills {
+    flex-direction: column;
+    gap: 5px;
+  }
+  
+  .country-nav-pills-scrollable .nav-link {
+    margin: 0 10px;
+    justify-content: center;
+    text-align: center;
+    padding: 10px 15px;
+  }
+  
+  .australia-subtabs .nav-tabs {
+    flex-wrap: wrap;
+  }
+  
+  .australia-subtabs .nav-tabs .nav-link {
+    padding: 10px 12px;
+    font-size: 0.85rem;
+  }
+  
+  .tab-content-scrollable {
+    padding: 15px;
+    height: 400px;
+  }
+  
+  .page-header-combined h1 {
+    font-size: 1.8rem;
+  }
+  
+  .page-header-combined .lead {
+    font-size: 1rem;
+  }
+  
+  .breadcrumbs ol {
+    flex-wrap: wrap;
+    font-size: 0.8rem;
+  }
+  
+  .country-nav-pills-scrollable {
+    height: 250px;
+  }
+}
+
+@media (max-width: 576px) {
+  .skilled-migration-optimized {
+    padding: 30px 0 15px 0;
+  }
+  
+  .page-header-combined h1 {
+    font-size: 1.6rem;
+  }
+  
+  .page-header-combined .destinations-heading {
+    font-size: 1.2rem;
+  }
+  
+  .country-header h3 {
+    font-size: 1.4rem;
+  }
+  
+  .visa-header h4 {
+    font-size: 1.2rem;
+  }
+  
+  .cta-section {
+    padding: 15px;
+  }
+  
+  .tab-content-scrollable {
+    height: 350px;
+    padding: 12px;
+  }
+  
+  .country-nav-pills-scrollable {
+    height: 200px;
+  }
+  
+  .footer-logo {
+    max-width: 120px;
+  }
+}
+
+/* Animation Enhancements */
+.country-content {
+  animation: fadeInUp 0.6s ease-out;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Hover Effects */
+.program-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* Footer Logo Optimization */
+.footer-logo {
+  max-width: 150px;
+  height: auto;
+  object-fit: contain;
+} 
