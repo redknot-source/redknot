@@ -1815,24 +1815,23 @@ textarea:focus {
 # Skilled Migration Page Styles
 --------------------------------------------------------------*/
 
-/* Page Title Section */
-.page-title {
-  padding: 140px 0 80px 0;
-  background: linear-gradient(135deg, var(--slate-100) 0%, var(--pure-white) 100%);
-  text-align: center;
+/* Combined Header Section */
+.combined-header {
+  padding: 120px 0 60px 0;
+  margin-bottom: 40px;
 }
 
-.page-title h1 {
-  font-size: 3rem;
+.combined-header h1 {
+  font-size: 2.5rem;
   font-weight: 700;
   color: var(--uae-blue);
-  margin-bottom: 20px;
+  margin-bottom: 15px;
 }
 
-.page-title p {
-  font-size: 1.2rem;
+.combined-header .lead {
+  font-size: 1.1rem;
   color: var(--slate-600);
-  margin-bottom: 30px;
+  margin-bottom: 20px;
 }
 
 .breadcrumbs {
@@ -1862,93 +1861,55 @@ textarea:focus {
   margin-left: 10px;
 }
 
-/* Optimized Skilled Migration Section */
-.skilled-migration-optimized {
-  padding: 60px 0 40px 0;
-  min-height: calc(100vh - 120px);
+/* Skilled Migration Section */
+.skilled-migration {
+  padding: 40px 0 80px 0;
+  background: var(--pure-white);
 }
 
-/* Combined Page Header */
-.page-header-combined {
-  margin-bottom: 40px;
-  padding: 0 0 30px 0;
-}
-
-.page-header-combined h1 {
-  font-size: 2.5rem;
-  font-weight: 700;
-  color: var(--uae-blue);
-  margin: 20px 0 15px 0;
-}
-
-.page-header-combined .lead {
-  font-size: 1.1rem;
-  color: var(--slate-600);
-  margin-bottom: 25px;
-}
-
-.page-header-combined .destinations-heading {
-  font-size: 1.5rem;
-  font-weight: 600;
-  color: var(--charcoal);
-  margin: 0;
-}
-
-/* Breadcrumbs Optimization */
-.breadcrumbs {
-  margin-bottom: 15px;
-}
-
-.breadcrumbs ol {
+/* Migration Container with Flex Layout */
+.migration-container {
   display: flex;
-  justify-content: center;
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  font-size: 0.9rem;
+  gap: 30px;
+  max-height: 70vh;
+  margin-top: 30px;
 }
 
-/* Optimized Tabs Container */
-.tabs-container-optimized {
-  display: flex;
-  gap: 20px;
-  height: calc(100vh - 400px);
-  min-height: 600px;
-  max-height: 700px;
-}
-
-/* Country Sidebar with Scroll */
+/* Country Sidebar */
 .country-sidebar {
   flex: 0 0 280px;
-  width: 280px;
+  max-width: 280px;
 }
 
-.country-nav-pills-scrollable {
+/* Country Navigation Pills (Vertical Tabs) */
+.country-nav-pills {
   background: var(--pure-white);
   border-radius: 10px;
   box-shadow: 0 5px 30px rgba(0, 0, 0, 0.1);
   padding: 15px 0;
   height: 100%;
+  max-height: 70vh;
   overflow-y: auto;
   scrollbar-width: thin;
-  scrollbar-color: var(--slate-300) transparent;
+  scrollbar-color: var(--uae-blue) var(--slate-100);
 }
 
-.country-nav-pills-scrollable::-webkit-scrollbar {
+.country-nav-pills::-webkit-scrollbar {
   width: 6px;
 }
 
-.country-nav-pills-scrollable::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-.country-nav-pills-scrollable::-webkit-scrollbar-thumb {
-  background-color: var(--slate-300);
+.country-nav-pills::-webkit-scrollbar-track {
+  background: var(--slate-100);
   border-radius: 3px;
 }
 
-.country-nav-pills-scrollable::-webkit-scrollbar-thumb:hover {
-  background-color: var(--slate-400);
+.country-nav-pills::-webkit-scrollbar-thumb {
+  background: var(--uae-blue);
+  border-radius: 3px;
+}
+
+.country-nav-pills::-webkit-scrollbar-thumb:hover {
+  background: var(--uae-gold);
 }
 
 .country-nav-pills .nav-pills {
@@ -1958,16 +1919,19 @@ textarea:focus {
 .country-nav-pills .nav-link {
   display: flex;
   align-items: center;
-  padding: 15px 25px;
+  justify-content: flex-start;
+  padding: 12px 20px;
   color: var(--slate-600);
   background: transparent;
   border: none;
-  border-radius: 8px;
-  margin: 5px 15px;
+  border-radius: 6px;
+  margin: 3px 10px;
   text-align: left;
   font-weight: 500;
+  font-size: 0.95rem;
   transition: all 0.3s ease;
   border-left: 3px solid transparent;
+  width: calc(100% - 20px);
 }
 
 .country-nav-pills .nav-link i {
@@ -2001,45 +1965,40 @@ textarea:focus {
   border-left-color: transparent;
 }
 
-/* Content Area with Scroll */
+/* Content Area */
 .content-area {
   flex: 1;
-  min-width: 0;
-}
-
-.tab-content-scrollable {
-  background: var(--pure-white);
-  border-radius: 10px;
-  box-shadow: 0 5px 30px rgba(0, 0, 0, 0.1);
-  padding: 25px;
-  height: 100%;
+  max-height: 70vh;
   overflow-y: auto;
   scrollbar-width: thin;
-  scrollbar-color: var(--slate-300) transparent;
+  scrollbar-color: var(--uae-blue) var(--slate-100);
 }
 
-.tab-content-scrollable::-webkit-scrollbar {
+.content-area::-webkit-scrollbar {
   width: 8px;
 }
 
-.tab-content-scrollable::-webkit-scrollbar-track {
-  background: var(--slate-50);
+.content-area::-webkit-scrollbar-track {
+  background: var(--slate-100);
   border-radius: 4px;
 }
 
-.tab-content-scrollable::-webkit-scrollbar-thumb {
-  background-color: var(--slate-400);
+.content-area::-webkit-scrollbar-thumb {
+  background: var(--uae-blue);
   border-radius: 4px;
 }
 
-.tab-content-scrollable::-webkit-scrollbar-thumb:hover {
-  background-color: var(--slate-500);
+.content-area::-webkit-scrollbar-thumb:hover {
+  background: var(--uae-gold);
 }
 
 /* Country Content Area */
 .country-content {
-  height: 100%;
-  padding: 0;
+  background: var(--pure-white);
+  border-radius: 10px;
+  box-shadow: 0 5px 30px rgba(0, 0, 0, 0.1);
+  padding: 25px;
+  margin-bottom: 20px;
 }
 
 .country-header h3 {
@@ -2222,69 +2181,76 @@ textarea:focus {
   margin-top: 80px;
 }
 
+/* Footer Logo Optimization */
+.footer-logo {
+  max-width: 120px;
+  height: auto;
+  margin-bottom: 15px;
+}
+
 /* Mobile Responsive Design */
 @media (max-width: 992px) {
-  .tabs-container-optimized {
+  .migration-container {
     flex-direction: column;
-    height: auto;
+    max-height: none;
+    gap: 20px;
   }
   
   .country-sidebar {
     flex: none;
-    width: 100%;
+    max-width: 100%;
+  }
+  
+  .country-nav-pills {
+    max-height: 200px;
     margin-bottom: 20px;
   }
   
-  .country-nav-pills-scrollable {
-    height: 200px;
-    padding: 10px 0;
-  }
-  
-  .country-nav-pills-scrollable .nav-pills {
+  .country-nav-pills .nav-pills {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
-    gap: 8px;
-    padding: 0 15px;
+    justify-content: flex-start;
   }
   
-  .country-nav-pills-scrollable .nav-link {
-    margin: 0;
+  .country-nav-pills .nav-link {
+    margin: 3px;
     padding: 8px 12px;
     font-size: 0.85rem;
-    border-radius: 20px;
-    white-space: nowrap;
+    width: auto;
+    flex: 0 0 auto;
   }
   
   .content-area {
-    flex: none;
+    max-height: none;
+    overflow-y: visible;
   }
   
-  .tab-content-scrollable {
-    height: 500px;
-    padding: 20px;
+  .combined-header {
+    padding: 100px 0 40px 0;
   }
   
-  .page-header-combined h1 {
-    font-size: 2rem;
+  .combined-header h1 {
+    font-size: 2.2rem;
   }
   
-  .skilled-migration-optimized {
-    padding: 40px 0 20px 0;
+  .skilled-migration {
+    padding: 30px 0 60px 0;
   }
 }
 
 @media (max-width: 768px) {
-  .country-nav-pills-scrollable .nav-pills {
-    flex-direction: column;
-    gap: 5px;
+  .country-nav-pills .nav-pills {
+    flex-direction: row;
+    justify-content: flex-start;
   }
   
-  .country-nav-pills-scrollable .nav-link {
-    margin: 0 10px;
+  .country-nav-pills .nav-link {
+    margin: 2px;
+    padding: 6px 10px;
+    font-size: 0.8rem;
     justify-content: center;
     text-align: center;
-    padding: 10px 15px;
+    min-width: auto;
   }
   
   .australia-subtabs .nav-tabs {
@@ -2296,44 +2262,42 @@ textarea:focus {
     font-size: 0.85rem;
   }
   
-  .tab-content-scrollable {
-    padding: 15px;
-    height: 400px;
+  .country-content {
+    padding: 18px;
   }
   
-  .page-header-combined h1 {
-    font-size: 1.8rem;
+  .combined-header h1 {
+    font-size: 1.9rem;
   }
   
-  .page-header-combined .lead {
+  .combined-header .lead {
     font-size: 1rem;
   }
   
   .breadcrumbs ol {
     flex-wrap: wrap;
-    font-size: 0.8rem;
   }
   
-  .country-nav-pills-scrollable {
-    height: 250px;
+  .migration-container {
+    gap: 15px;
   }
 }
 
 @media (max-width: 576px) {
-  .skilled-migration-optimized {
-    padding: 30px 0 15px 0;
+  .combined-header {
+    padding: 80px 0 30px 0;
   }
   
-  .page-header-combined h1 {
-    font-size: 1.6rem;
+  .combined-header h1 {
+    font-size: 1.7rem;
   }
   
-  .page-header-combined .destinations-heading {
-    font-size: 1.2rem;
+  .combined-header .lead {
+    font-size: 0.95rem;
   }
   
   .country-header h3 {
-    font-size: 1.4rem;
+    font-size: 1.5rem;
   }
   
   .visa-header h4 {
@@ -2344,17 +2308,22 @@ textarea:focus {
     padding: 15px;
   }
   
-  .tab-content-scrollable {
-    height: 350px;
-    padding: 12px;
+  .skilled-migration {
+    padding: 20px 0 40px 0;
   }
   
-  .country-nav-pills-scrollable {
-    height: 200px;
+  .country-nav-pills .nav-link {
+    padding: 5px 8px;
+    font-size: 0.75rem;
+    margin: 1px;
+  }
+  
+  .migration-container {
+    gap: 10px;
   }
   
   .footer-logo {
-    max-width: 120px;
+    max-width: 100px;
   }
 }
 
@@ -2384,11 +2353,4 @@ textarea:focus {
 .btn:hover {
   transform: translateY(-2px);
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
-}
-
-/* Footer Logo Optimization */
-.footer-logo {
-  max-width: 150px;
-  height: auto;
-  object-fit: contain;
 } 
