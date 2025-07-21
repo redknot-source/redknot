@@ -290,7 +290,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .navbar-mobile ul li {
   padding: 0;
-  margin: 0 15px 8px 15px;
+  margin: 0 15px 4px 15px;
 }
 
 .navbar-mobile ul li a,
@@ -315,8 +315,8 @@ h1, h2, h3, h4, h5, h6 {
 .navbar-mobile ul li.dropdown ul {
   position: static;
   display: none;
-  margin: 10px 0 15px 20px;
-  padding: 15px 0;
+  margin: 5px 0 5px 20px;
+  padding: 10px 0;
   border: 1px solid rgba(182, 138, 53, 0.3);
   background: rgba(45, 55, 72, 0.9);
   border-radius: 8px;
@@ -1585,16 +1585,30 @@ section {
 @media (max-width: 767px) {
   .navbar-mobile ul {
     top: 10px;
-    padding: 15px 0;
+    padding: 10px 0;
   }
   
   .navbar-mobile ul li {
-    margin: 0 10px 6px 10px;
+    margin: 0 10px 3px 10px;
   }
   
   .navbar-mobile ul li a {
-    padding: 12px 15px;
+    padding: 10px 15px;
     font-size: 15px;
+  }
+  
+  .navbar-mobile ul li.dropdown ul {
+    margin: 3px 0 3px 15px;
+    padding: 8px 0;
+  }
+  
+  .navbar-mobile ul li.dropdown ul li {
+    margin: 0 8px 2px 8px;
+  }
+  
+  .navbar-mobile ul li.dropdown ul a {
+    padding: 8px 12px;
+    font-size: 14px;
   }
 }
 

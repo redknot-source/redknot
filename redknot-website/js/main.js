@@ -270,35 +270,43 @@
   window.addEventListener('load', () => {
     aos_init();
     initDropdownNav();
+    initSwiper();
   });
 
   /**
    * Initiate Swiper slider
    */
-  new Swiper('.slides-3', {
-    speed: 600,
-    loop: true,
-    autoplay: {
-      delay: 5000,
-      disableOnInteraction: false
-    },
-    slidesPerView: 'auto',
-    pagination: {
-      el: '.swiper-pagination',
-      type: 'bullets',
-      clickable: true
-    },
-    breakpoints: {
-      320: {
-        slidesPerView: 1,
-        spaceBetween: 40
-      },
-      1200: {
-        slidesPerView: 3,
-        spaceBetween: 40
-      }
+  function initSwiper() {
+    if (typeof Swiper !== 'undefined' && document.querySelector('.slides-3')) {
+      new Swiper('.slides-3', {
+        speed: 600,
+        loop: true,
+        autoplay: {
+          delay: 5000,
+          disableOnInteraction: false
+        },
+        slidesPerView: 'auto',
+        pagination: {
+          el: '.swiper-pagination',
+          type: 'bullets',
+          clickable: true
+        },
+        breakpoints: {
+          320: {
+            slidesPerView: 1,
+            spaceBetween: 40
+          },
+          1200: {
+            slidesPerView: 3,
+            spaceBetween: 40
+          }
+        }
+      });
     }
-  });
+  }
+  
+  // Initialize Swiper after a short delay to ensure it's loaded
+  setTimeout(initSwiper, 100);
 
   /**
    * Language switching functionality
