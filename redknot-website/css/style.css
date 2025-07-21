@@ -164,7 +164,76 @@ h1, h2, h3, h4, h5, h6 {
   background: var(--uae-blue);
 }
 
+/*--------------------------------------------------------------
+# Dropdown Navigation
+--------------------------------------------------------------*/
+.navbar .dropdown {
+  position: relative;
+}
 
+.navbar .dropdown-toggle {
+  position: relative;
+}
+
+.navbar .dropdown-toggle i {
+  font-size: 10px;
+  margin-left: 8px;
+  transition: transform 0.3s ease;
+}
+
+.navbar .dropdown:hover .dropdown-toggle i {
+  transform: rotate(180deg);
+}
+
+.navbar .dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  min-width: 250px;
+  background: var(--pure-white);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+  border-radius: 8px;
+  padding: 10px 0;
+  margin: 0;
+  list-style: none;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px);
+  transition: all 0.3s ease;
+  z-index: 1000;
+  border: 1px solid rgba(45, 55, 72, 0.1);
+}
+
+.navbar .dropdown:hover .dropdown-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.navbar .dropdown-menu li {
+  position: relative;
+}
+
+.navbar .dropdown-menu a {
+  padding: 12px 20px;
+  color: var(--charcoal);
+  font-size: 14px;
+  font-weight: 500;
+  display: block;
+  border-radius: 0;
+  transition: all 0.3s ease;
+  text-decoration: none;
+}
+
+.navbar .dropdown-menu a:hover {
+  background: rgba(182, 138, 53, 0.1);
+  color: var(--uae-gold);
+  padding-left: 25px;
+}
+
+.navbar .dropdown-menu li:not(:last-child) {
+  border-bottom: 1px solid rgba(45, 55, 72, 0.05);
+}
 
 /*--------------------------------------------------------------
 # Mobile Navigation
@@ -184,6 +253,37 @@ h1, h2, h3, h4, h5, h6 {
   }
 
   .navbar ul {
+    display: none;
+  }
+  
+  /* Mobile Dropdown Styles */
+  .navbar .dropdown-menu {
+    position: static;
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+    box-shadow: none;
+    border: none;
+    background: transparent;
+    padding: 0;
+    margin-left: 20px;
+    border-radius: 0;
+  }
+  
+  .navbar .dropdown-menu a {
+    padding: 8px 0;
+    color: #ffffff;
+    font-size: 14px;
+    border-bottom: none;
+  }
+  
+  .navbar .dropdown-menu a:hover {
+    color: #b68a35;
+    background: transparent;
+    padding-left: 0;
+  }
+  
+  .navbar .dropdown-toggle i {
     display: none;
   }
 }

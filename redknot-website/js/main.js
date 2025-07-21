@@ -181,8 +181,82 @@
       mirror: false
     });
   }
+  /**
+   * Dropdown Navigation
+   */
+  function initDropdownNav() {
+    const dropdowns = select('.navbar .dropdown', true);
+    
+    if (dropdowns) {
+      dropdowns.forEach(dropdown => {
+        const toggle = dropdown.querySelector('.dropdown-toggle');
+        const menu = dropdown.querySelector('.dropdown-menu');
+        
+        if (toggle && menu) {
+          // Handle click events for mobile
+          toggle.addEventListener('click', function(e) {
+            if (window.innerWidth <= 991) {
+              e.preventDefault();
+              
+              // Toggle the dropdown menu visibility
+              menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+              
+              // Close other dropdowns
+              dropdowns.forEach(otherDropdown => {
+                if (otherDropdown !== dropdown) {
+                  const otherMenu = otherDropdown.querySelector('.dropdown-menu');
+                  if (otherMenu) {
+                    otherMenu.style.display = 'none';
+                  }
+                }
+              });
+            }
+          });
+          
+          // Handle hover for desktop (CSS handles most of this, but we need click handling)
+          dropdown.addEventListener('mouseenter', function() {
+            if (window.innerWidth > 991) {
+              // Desktop hover is handled by CSS
+            }
+          });
+          
+          dropdown.addEventListener('mouseleave', function() {
+            if (window.innerWidth > 991) {
+              // Desktop hover is handled by CSS
+            }
+          });
+        }
+      });
+    }
+    
+    // Close dropdowns when clicking outside
+    document.addEventListener('click', function(e) {
+      if (!e.target.closest('.navbar .dropdown')) {
+        dropdowns.forEach(dropdown => {
+          const menu = dropdown.querySelector('.dropdown-menu');
+          if (menu) {
+            menu.style.display = 'none';
+          }
+        });
+      }
+    });
+    
+    // Handle window resize
+    window.addEventListener('resize', function() {
+      dropdowns.forEach(dropdown => {
+        const menu = dropdown.querySelector('.dropdown-menu');
+        if (menu) {
+          if (window.innerWidth > 991) {
+            menu.style.display = ''; // Reset to CSS control
+          }
+        }
+      });
+    });
+  }
+
   window.addEventListener('load', () => {
     aos_init();
+    initDropdownNav();
   });
 
   /**
