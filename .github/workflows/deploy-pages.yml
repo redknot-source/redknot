@@ -27,7 +27,7 @@ jobs:
       - name: Copy website files
         run: |
           mkdir -p _site
-          cp -r redknot-website/* _site/
+          cp -r docs/* _site/
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
