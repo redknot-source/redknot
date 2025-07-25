@@ -263,10 +263,10 @@
   function initSwiper() {
     if (typeof Swiper !== 'undefined' && document.querySelector('.slides-3')) {
       new Swiper('.slides-3', {
-        speed: 600,
+        speed: 800,
         loop: true,
         autoplay: {
-          delay: 5000,
+          delay: 8000,
           disableOnInteraction: false
         },
         slidesPerView: 'auto',

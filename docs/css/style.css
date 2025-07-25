@@ -625,6 +625,31 @@ section {
   overflow: hidden;
 }
 
+.services.sections-bg {
+  background-image: url('images/burj1.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  position: relative;
+}
+
+.services.sections-bg::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(245, 245, 245, 0.85);
+  z-index: 1;
+}
+
+.services.sections-bg .container {
+  position: relative;
+  z-index: 2;
+}
+
 .sections-bg {
   background-color: var(--slate-100);
 }
@@ -651,7 +676,8 @@ section {
 # Services Section
 --------------------------------------------------------------*/
 .services .service-item {
-  background: var(--pure-white);
+  background: #ffffff;
+  opacity:0.6;
   text-align: center;
   border-radius: 10px;
   padding: 40px 30px;
@@ -758,7 +784,28 @@ section {
 # Assessment Section
 --------------------------------------------------------------*/
 .assessment {
-  background: var(--slate-100);
+  background-image: url('images/visa.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  position: relative;
+}
+
+.assessment::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(245, 245, 245, 0.85);
+  z-index: 1;
+}
+
+.assessment .container {
+  position: relative;
+  z-index: 2;
 }
 
 .assessment-form {
@@ -811,11 +858,56 @@ section {
 # Testimonials Section
 --------------------------------------------------------------*/
 .testimonials {
-  background: var(--pure-white);
+  background-image: url('images/czech-hero3-bg.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  position: relative;
+  z-index: 10;
+  padding: 80px 0;
+}
+
+.testimonials::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.88);
+  z-index: 1;
+}
+
+.testimonials .container {
+  position: relative;
+  z-index: 2;
+}
+
+.testimonials .slides-3 {
+  opacity: 1;
+  visibility: visible;
+}
+
+.testimonials .swiper {
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+.testimonials .swiper-wrapper {
+  opacity: 1;
+  visibility: visible;
+}
+
+.testimonials .swiper-slide {
+  opacity: 1;
+  visibility: visible;
 }
 
 .testimonial-wrap {
   padding: 0 20px;
+  opacity: 1;
+  visibility: visible;
 }
 
 .testimonial-item {
@@ -824,6 +916,9 @@ section {
   border-radius: 15px;
   position: relative;
   border-left: 4px solid var(--uae-gold);
+  opacity: 1;
+  visibility: visible;
+  z-index: 1;
 }
 
 .testimonial-img {
@@ -1358,7 +1453,7 @@ section {
 # Services Section Enhancements
 --------------------------------------------------------------*/
 .service-outro {
-  background: linear-gradient(135deg, rgba(10, 76, 150, 0.05), rgba(182, 138, 53, 0.05));
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.05), rgb(250, 250, 250));
   padding: 50px 40px;
   border-radius: 20px;
   border: 2px solid rgba(10, 76, 150, 0.1);
@@ -1598,9 +1693,71 @@ section {
 /*--------------------------------------------------------------
 # About Page Styles
 --------------------------------------------------------------*/
+.about-page-bg {
+  background-image: url('images/czech-hero1-bg.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  position: relative;
+  min-height: 100vh;
+}
+
+.about-page-bg::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.85);
+  z-index: -1;
+}
+
+.skilled-migration-page-bg {
+  background-image: url('images/hero-france1.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  position: relative;
+  min-height: 100vh;
+}
+
+.skilled-migration-page-bg::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.85);
+  z-index: -1;
+}
+
+.work-permits-page-bg {
+  background-image: url('images/germany-hero2-bg.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  position: relative;
+  min-height: 100vh;
+}
+
+.work-permits-page-bg::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.85);
+  z-index: -1;
+}
 .about-hero {
   padding: 140px 0 80px 0;
-  background: linear-gradient(135deg, var(--slate-100) 0%, var(--pure-white) 100%);
+  background: transparent;
 }
 
 .about-hero h1 {
@@ -1975,7 +2132,7 @@ textarea:focus {
 /* Skilled Migration Section */
 .skilled-migration {
   padding: 40px 0 80px 0;
-  background: var(--pure-white);
+  background: transparent;
 }
 
 /* Migration Container with Flex Layout */
@@ -1996,7 +2153,7 @@ textarea:focus {
 .country-nav-pills {
   background: var(--pure-white);
   border-radius: 10px;
-  box-shadow: 0 5px 30px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 5px 30px rgba(0, 0, 0, 0.5);
   padding: 15px 0;
   height: 100%;
   max-height: 70vh;
@@ -2083,6 +2240,10 @@ textarea:focus {
   overflow-y: auto;
   scrollbar-width: thin;
   scrollbar-color: var(--uae-blue) var(--slate-100);
+  border-radius: 10px;
+  box-shadow: 0 5px 30px rgba(0, 0, 0, 0.5);
+  padding: 5px;
+  
 }
 
 .content-area::-webkit-scrollbar {
