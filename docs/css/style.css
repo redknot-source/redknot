@@ -518,12 +518,13 @@ h1, h2, h3, h4, h5, h6 {
 /* Hero Text Styles */
 .hero-video h1,
 .hero-content h1 {
-  font-size: 48px;
-  font-weight: 700;
-  line-height: 56px;
+  font-size: 3.5rem;
+  font-weight: 900;
+  line-height: 1.1;
   color: var(--pure-white);
-  margin-bottom: 20px;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  margin-bottom: 1rem;
+  text-shadow: 0 0 15px rgba(182, 138, 53, 1), 2px 2px 4px rgba(0,0,0,0.5);
+  white-space: nowrap;
 }
 
 .hero-video h2,
@@ -630,7 +631,7 @@ section {
 
 .section-header {
   text-align: center;
-  padding-bottom: 40px;
+  padding-bottom: 20px;
 }
 
 .section-header h2 {
@@ -882,13 +883,56 @@ section {
 --------------------------------------------------------------*/
 .contact {
   background: var(--slate-100);
+  position: relative;
+  overflow: hidden;
+}
+
+.contact.with-map-bg {
+  background: none;
+  position: relative;
+  min-height: 100vh;
+}
+
+.contact-map-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.contact-map-background iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  opacity: 1;
+}
+
+.contact-map-background::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(rgba(10, 76, 150, 0.1), rgba(10, 76, 150, 0.6));
+  z-index: 2;
+}
+
+.contact-content {
+  position: relative;
+  z-index: 3;
+  background: transparent;
 }
 
 .contact .info-container {
-  background: var(--pure-white);
+  background: rgba(255, 255, 255, 0.95);
   padding: 40px;
   border-radius: 15px;
-  box-shadow: 0 10px 40px rgba(10, 76, 150, 0.1);
+  box-shadow: 0 10px 40px rgba(10, 76, 150, 0.3);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
   height: 100%;
 }
 
@@ -930,10 +974,12 @@ section {
 }
 
 .contact .php-email-form {
-  background: var(--pure-white);
+  background: rgba(255, 255, 255, 0.95);
   padding: 40px;
   border-radius: 15px;
-  box-shadow: 0 10px 40px rgba(10, 76, 150, 0.1);
+  box-shadow: 0 10px 40px rgba(10, 76, 150, 0.3);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .contact .php-email-form .form-group {
@@ -1397,15 +1443,20 @@ section {
 # About Introduction Section
 --------------------------------------------------------------*/
 .about-intro {
-  padding: 80px 0;
-  background: var(--pure-white);
+  padding: 40px 0 20px 0;
+  background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(10, 76, 150, 0.7)), url('../images/burj.jpg');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  color: white;
 }
 
 .about-intro .section-header h2 {
-  color: var(--uae-blue);
+  color: white;
   font-size: 36px;
   font-weight: 700;
   margin-bottom: 15px;
+  text-shadow: 0 0 15px rgba(182, 138, 53, 1), 2px 2px 4px rgba(0,0,0,0.5);
 }
 
 .about-intro .section-header .lead {
@@ -1413,6 +1464,7 @@ section {
   font-size: 20px;
   font-weight: 500;
   margin-bottom: 0;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
 }
 
 .about-text {
@@ -1420,11 +1472,31 @@ section {
   padding: 0 15px;
 }
 
+.about-intro .about-text p {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: rgba(255, 255, 255, 0.9) !important;
+  margin-bottom: 25px;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+}
+
 .about-text p {
   color: var(--slate-600);
   font-size: 16px;
   line-height: 28px;
   margin-bottom: 20px;
+}
+
+.about-intro .expertise-item {
+  text-align: center;
+  padding: 30px 20px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+  height: 100%;
 }
 
 .expertise-item {
@@ -1446,9 +1518,30 @@ section {
   margin-bottom: 20px;
 }
 
+.about-intro .expertise-icon i {
+  font-size: 48px;
+  color: var(--uae-gold) !important;
+}
+
 .expertise-icon i {
   font-size: 48px;
   color: var(--uae-blue);
+}
+
+.about-intro .expertise-item h5 {
+  color: white;
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 15px;
+  text-shadow: 0 0 10px rgba(182, 138, 53, 0.8);
+}
+
+.about-intro .expertise-item p {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 14px;
+  line-height: 22px;
+  margin-bottom: 0;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
 }
 
 .expertise-item h5 {
@@ -1468,7 +1561,7 @@ section {
 /* Mobile Responsiveness for About Intro */
 @media (max-width: 768px) {
   .about-intro {
-    padding: 60px 0;
+    padding: 60px 0 15px 0;
   }
   
   .about-intro .section-header h2 {
@@ -1481,6 +1574,24 @@ section {
   
   .expertise-item {
     margin-bottom: 20px;
+  }
+  
+  .hero-video h1,
+  .hero-content h1 {
+    white-space: normal;
+    font-size: 2.5rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .about-intro {
+    padding: 40px 0 10px 0;
+  }
+  
+  .hero-video h1,
+  .hero-content h1 {
+    font-size: 2rem;
+    white-space: normal;
   }
 }
 
@@ -1505,7 +1616,7 @@ section {
 }
 
 .about-content {
-  padding: 80px 0;
+  padding: 20px 0;
 }
 
 .about-content .about-text {

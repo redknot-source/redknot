@@ -588,18 +588,30 @@
   </section>
 
   <!-- Contact Section -->
-  <section id="contact" class="contact sections-bg">
-    <div class="container" data-aos="fade-up">
+  <section id="contact" class="contact with-map-bg">
+    <!-- Map Background -->
+    <div class="contact-map-background">
+      <iframe 
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3610.158977493265!2d55.27244431501244!3d25.197197283896976!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e5f43496ad9c645%3A0xbde66e5084295162!2sBurj%20Khalifa!5e0!3m2!1sen!2sae!4v1699999999999!5m2!1sen!2sae&dirflg=d"
+        allowfullscreen="" 
+        loading="lazy" 
+        referrerpolicy="no-referrer-when-downgrade">
+      </iframe>
+    </div>
+    
+    <!-- Contact Content Overlay -->
+    <div class="contact-content">
+      <div class="container" data-aos="fade-up">
 
-      <div class="section-header">
-        <h2>Contact Us</h2>
-        <p>Get in touch for your Dubai work visa consultation</p>
-      </div>
+        <div class="section-header">
+          <h2 style="color: white; text-shadow: 0 0 15px rgba(182, 138, 53, 1), 2px 2px 4px rgba(0,0,0,0.5);">Contact Us</h2>
+          <p style="color: rgba(255, 255, 255, 0.9); text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);">Get in touch for your Dubai work visa consultation</p>
+        </div>
 
-      <div class="row gx-lg-0 gy-4">
+        <div class="row gx-lg-0 gy-4">
 
-        <div class="col-lg-4">
-          <div class="info-container d-flex flex-column align-items-center justify-content-center">
+          <div class="col-lg-4">
+            <div class="info-container d-flex flex-column align-items-center justify-content-center">
             
             <div class="info-item d-flex">
               <i class="bi bi-geo-alt flex-shrink-0"></i>
@@ -637,53 +649,54 @@
 
         </div>
 
-        <div class="col-lg-8">
-          <form name="contact" method="POST" data-netlify="true" data-netlify-recaptcha="true" class="php-email-form">
-            <input type="hidden" name="form-name" value="contact">
-            
-            <div class="row">
-              <div class="col-md-6 form-group">
-                <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" required>
+          <div class="col-lg-8">
+            <form name="contact" method="POST" data-netlify="true" data-netlify-recaptcha="true" class="php-email-form">
+              <input type="hidden" name="form-name" value="contact">
+              
+              <div class="row">
+                <div class="col-md-6 form-group">
+                  <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" required>
+                </div>
+                <div class="col-md-6 form-group mt-3 mt-md-0">
+                  <input type="email" class="form-control" name="email" id="email" placeholder="Your Email" required>
+                </div>
               </div>
-              <div class="col-md-6 form-group mt-3 mt-md-0">
-                <input type="email" class="form-control" name="email" id="email" placeholder="Your Email" required>
+              
+              <div class="row">
+                <div class="col-md-6 form-group mt-3">
+                  <input type="tel" class="form-control" name="phone" id="phone" placeholder="Your Phone" required>
+                </div>
+                               <div class="col-md-6 form-group mt-3">
+                   <select class="form-control" name="service" id="service" title="Select the service you need" required>
+                     <option value="">Select Service</option>
+                     <option value="work-visa">Work Visa Application</option>
+                     <option value="family-visa">Family Reunification</option>
+                     <option value="document-auth">Document Authentication</option>
+                     <option value="visa-appeal">Visa Appeal</option>
+                     <option value="consultation">General Consultation</option>
+                   </select>
+                 </div>
               </div>
-            </div>
-            
-            <div class="row">
-              <div class="col-md-6 form-group mt-3">
-                <input type="tel" class="form-control" name="phone" id="phone" placeholder="Your Phone" required>
+              
+              <div class="form-group mt-3">
+                <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject" required>
               </div>
-                             <div class="col-md-6 form-group mt-3">
-                 <select class="form-control" name="service" id="service" title="Select the service you need" required>
-                   <option value="">Select Service</option>
-                   <option value="work-visa">Work Visa Application</option>
-                   <option value="family-visa">Family Reunification</option>
-                   <option value="document-auth">Document Authentication</option>
-                   <option value="visa-appeal">Visa Appeal</option>
-                   <option value="consultation">General Consultation</option>
-                 </select>
-               </div>
-            </div>
-            
-            <div class="form-group mt-3">
-              <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject" required>
-            </div>
-            
-            <div class="form-group mt-3">
-              <textarea class="form-control" name="message" rows="7" placeholder="Message" required></textarea>
-            </div>
-            
-            <div data-netlify-recaptcha="true"></div>
-            
-            <div class="text-center">
-              <button type="submit">Send Message</button>
-            </div>
-          </form>
+              
+              <div class="form-group mt-3">
+                <textarea class="form-control" name="message" rows="7" placeholder="Message" required></textarea>
+              </div>
+              
+              <div data-netlify-recaptcha="true"></div>
+              
+              <div class="text-center">
+                <button type="submit">Send Message</button>
+              </div>
+            </form>
+          </div>
+
         </div>
 
       </div>
-
     </div>
   </section>
 
