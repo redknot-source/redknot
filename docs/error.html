@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Error - Red-Knot Immigration</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css">
+    <style>
+        .error-container {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(135deg, #dc3545 0%, #6c757d 100%);
+        }
+        .error-card {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            padding: 3rem;
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .error-icon {
+            width: 80px;
+            height: 80px;
+            background: #dc3545;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 2rem;
+            color: white;
+            font-size: 2rem;
+        }
+        .btn-retry {
+            background: #0A4C96;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 8px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .btn-retry:hover {
+            background: #083a75;
+            transform: translateY(-2px);
+        }
+        .contact-info {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-top: 2rem;
+        }
+        .troubleshooting {
+            text-align: left;
+            background: #e9ecef;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="error-container">
+        <div class="container">
+            <div class="error-card">
+                <div class="error-icon">
+                    ⚠
+                </div>
+                
+                <h1 class="mb-4" style="color: #dc3545; font-weight: 700;">Oops! Something went wrong</h1>
+                
+                <div id="error-message">
+                    <p class="lead mb-4">We're sorry, but there was an issue processing your request. Please try again or contact us directly.</p>
+                </div>
+                
+                <div class="troubleshooting">
+                    <h6 style="color: #0A4C96; margin-bottom: 1rem;">Quick Troubleshooting:</h6>
+                    <ul class="mb-0">
+                        <li>Check that all required fields are filled out</li>
+                        <li>Ensure your email address is valid</li>
+                        <li>Try refreshing the page and submitting again</li>
+                        <li>If the problem persists, contact us directly using the information below</li>
+                    </ul>
+                </div>
+                
+                <div class="contact-info">
+                    <h5 style="color: #B68A35; margin-bottom: 1rem;">Contact Us Directly</h5>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <strong>📧 Email:</strong><br>
+                            <a href="mailto:contact@redknotconsulting.com">contact@redknotconsulting.com</a>
+                        </div>
+                        <div class="col-md-6">
+                            <strong>📱 WhatsApp:</strong><br>
+                            <a href="https://wa.me/971501234567" target="_blank">+971 50 123 4567</a>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-md-6">
+                            <strong>📞 Phone:</strong><br>
+                            <a href="tel:+971501234567">+971 50 123 4567</a>
+                        </div>
+                        <div class="col-md-6">
+                            <strong>🕒 Business Hours:</strong><br>
+                            Sunday - Thursday: 9 AM - 6 PM
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="mt-4">
+                    <button onclick="history.back()" class="btn btn-primary btn-retry me-3">Try Again</button>
+                    <a href="/" class="btn btn-outline-primary">Return Home</a>
+                </div>
+                
+                <div class="mt-4">
+                    <small class="text-muted">
+                        Error Code: <span id="error-code">GEN001</span> | 
+                        Time: <span id="error-time"></span>
+                    </small>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Set current time
+            document.getElementById('error-time').textContent = new Date().toLocaleString();
+            
+            // Customize message based on error type
+            const urlParams = new URLSearchParams(window.location.search);
+            const errorType = urlParams.get('type');
+            const errorMessage = document.getElementById('error-message');
+            const errorCode = document.getElementById('error-code');
+            
+            switch(errorType) {
+                case 'email':
+                    errorMessage.innerHTML = `
+                        <p class="lead mb-4">There was an issue sending your email. This could be a temporary server issue.</p>
+                        <p>Please try submitting again, or contact us directly using WhatsApp or phone.</p>
+                    `;
+                    errorCode.textContent = 'EMAIL001';
+                    break;
+                    
+                case 'validation':
+                    errorMessage.innerHTML = `
+                        <p class="lead mb-4">Please check your form data and ensure all required fields are completed correctly.</p>
+                        <p>Make sure your email address is valid and all fields are filled out properly.</p>
+                    `;
+                    errorCode.textContent = 'VAL001';
+                    break;
+                    
+                case 'assessment':
+                    errorMessage.innerHTML = `
+                        <p class="lead mb-4">There was an issue processing your visa assessment request.</p>
+                        <p>You can try submitting again or contact us directly for a free consultation.</p>
+                    `;
+                    errorCode.textContent = 'ASSESS001';
+                    break;
+                    
+                case 'newsletter':
+                    errorMessage.innerHTML = `
+                        <p class="lead mb-4">There was an issue subscribing you to our newsletter.</p>
+                        <p>Please check your email address and try again, or contact us to manually add you to our mailing list.</p>
+                    `;
+                    errorCode.textContent = 'NEWS001';
+                    break;
+                    
+                default:
+                    // Keep default message
+                    errorCode.textContent = 'GEN001';
+                    break;
+            }
+        });
+        
+        // Auto-refresh after 30 seconds (optional)
+        // setTimeout(function() {
+        //     if (confirm('Would you like to try loading the page again?')) {
+        //         window.location.reload();
+        //     }
+        // }, 30000);
+    </script>
+</body>
+</html> 

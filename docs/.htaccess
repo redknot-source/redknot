@@ -1,0 +1,245 @@
+# Red-Knot Immigration - BigRock .htaccess Configuration
+# Performance and Security Optimization for Apache Server
+
+# Enable Rewrite Engine
+RewriteEngine On
+
+# ===============================================
+# 1. SECURITY HEADERS
+# ===============================================
+
+# Prevent access to sensitive files
+<FilesMatch "\.(htaccess|htpasswd|ini|log|txt)$">
+    Order Allow,Deny
+    Deny from all
+</FilesMatch>
+
+# Protect PHP files in forms directory from direct access
+<Files "contact-form.php">
+    Order Allow,Deny
+    Allow from all
+</Files>
+
+# Security Headers
+<IfModule mod_headers.c>
+    Header always set X-Content-Type-Options nosniff
+    Header always set X-Frame-Options DENY
+    Header always set X-XSS-Protection "1; mode=block"
+    Header always set Referrer-Policy "strict-origin-when-cross-origin"
+    Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains"
+    Header always set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline' cdn.jsdelivr.net cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' cdn.jsdelivr.net fonts.googleapis.com; font-src 'self' fonts.gstatic.com; img-src 'self' data: *.redknotconsulting.com; connect-src 'self' wa.me api.whatsapp.com"
+</IfModule>
+
+# ===============================================
+# 2. HTTPS REDIRECT
+# ===============================================
+
+# Force HTTPS
+RewriteCond %{HTTPS} off
+RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# ===============================================
+# 3. WWW REDIRECT
+# ===============================================
+
+# Force WWW (uncomment if needed)
+# RewriteCond %{HTTP_HOST} ^redknotconsulting\.com [NC]
+# RewriteRule ^(.*)$ https://www.redknotconsulting.com/$1 [L,R=301]
+
+# OR Force non-WWW (comment out if using WWW)
+RewriteCond %{HTTP_HOST} ^www\.redknotconsulting\.com [NC]
+RewriteRule ^(.*)$ https://redknotconsulting.com/$1 [L,R=301]
+
+# ===============================================
+# 4. COMPRESSION
+# ===============================================
+
+# Enable Gzip Compression
+<IfModule mod_deflate.c>
+    # Compress HTML, CSS, JavaScript, Text, XML and fonts
+    AddOutputFilterByType DEFLATE application/javascript
+    AddOutputFilterByType DEFLATE application/rss+xml
+    AddOutputFilterByType DEFLATE application/vnd.ms-fontobject
+    AddOutputFilterByType DEFLATE application/x-font
+    AddOutputFilterByType DEFLATE application/x-font-opentype
+    AddOutputFilterByType DEFLATE application/x-font-otf
+    AddOutputFilterByType DEFLATE application/x-font-truetype
+    AddOutputFilterByType DEFLATE application/x-font-ttf
+    AddOutputFilterByType DEFLATE application/x-javascript
+    AddOutputFilterByType DEFLATE application/xhtml+xml
+    AddOutputFilterByType DEFLATE application/xml
+    AddOutputFilterByType DEFLATE font/opentype
+    AddOutputFilterByType DEFLATE font/otf
+    AddOutputFilterByType DEFLATE font/ttf
+    AddOutputFilterByType DEFLATE image/svg+xml
+    AddOutputFilterByType DEFLATE image/x-icon
+    AddOutputFilterByType DEFLATE text/css
+    AddOutputFilterByType DEFLATE text/html
+    AddOutputFilterByType DEFLATE text/javascript
+    AddOutputFilterByType DEFLATE text/plain
+    AddOutputFilterByType DEFLATE text/xml
+    
+    # Remove browser bugs (only needed for really old browsers)
+    BrowserMatch ^Mozilla/4 gzip-only-text/html
+    BrowserMatch ^Mozilla/4\.0[678] no-gzip
+    BrowserMatch \bMSIE !no-gzip !gzip-only-text/html
+    Header append Vary User-Agent
+</IfModule>
+
+# ===============================================
+# 5. BROWSER CACHING
+# ===============================================
+
+<IfModule mod_expires.c>
+    ExpiresActive on
+    
+    # Images
+    ExpiresByType image/jpg "access plus 1 year"
+    ExpiresByType image/jpeg "access plus 1 year"
+    ExpiresByType image/gif "access plus 1 year"
+    ExpiresByType image/png "access plus 1 year"
+    ExpiresByType image/webp "access plus 1 year"
+    ExpiresByType image/svg+xml "access plus 1 year"
+    ExpiresByType image/x-icon "access plus 1 year"
+    
+    # Video
+    ExpiresByType video/mp4 "access plus 1 year"
+    ExpiresByType video/mpeg "access plus 1 year"
+    
+    # CSS and JavaScript
+    ExpiresByType text/css "access plus 1 month"
+    ExpiresByType application/javascript "access plus 1 month"
+    ExpiresByType text/javascript "access plus 1 month"
+    
+    # Fonts
+    ExpiresByType font/ttf "access plus 1 year"
+    ExpiresByType font/otf "access plus 1 year"
+    ExpiresByType font/woff "access plus 1 year"
+    ExpiresByType font/woff2 "access plus 1 year"
+    ExpiresByType application/font-woff "access plus 1 year"
+    
+    # HTML
+    ExpiresByType text/html "access plus 600 seconds"
+    
+    # Documents
+    ExpiresByType application/pdf "access plus 1 month"
+    
+    # Data
+    ExpiresByType text/xml "access plus 600 seconds"
+    ExpiresByType application/xml "access plus 600 seconds"
+    ExpiresByType application/json "access plus 600 seconds"
+</IfModule>
+
+# ===============================================
+# 6. URL REWRITING
+# ===============================================
+
+# Remove .html extension from URLs (optional)
+# RewriteCond %{REQUEST_FILENAME} !-d
+# RewriteCond %{REQUEST_FILENAME} !-f
+# RewriteRule ^([^\.]+)$ $1.html [NC,L]
+
+# Handle trailing slash
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)/$ /$1 [L,R=301]
+
+# ===============================================
+# 7. ERROR PAGES
+# ===============================================
+
+# Custom Error Pages
+ErrorDocument 404 /error.html
+ErrorDocument 500 /error.html
+ErrorDocument 403 /error.html
+
+# ===============================================
+# 8. MIME TYPES
+# ===============================================
+
+<IfModule mod_mime.c>
+    # Web fonts
+    AddType application/font-woff2 .woff2
+    AddType application/font-woff .woff
+    AddType application/vnd.ms-fontobject .eot
+    AddType font/ttf .ttf
+    AddType font/otf .otf
+    
+    # Images
+    AddType image/webp .webp
+    AddType image/svg+xml .svg
+    
+    # Videos
+    AddType video/mp4 .mp4
+    AddType video/webm .webm
+    
+    # Other
+    AddType application/json .json
+    AddType application/ld+json .jsonld
+</IfModule>
+
+# ===============================================
+# 9. PREVENT HOTLINKING
+# ===============================================
+
+# Prevent image hotlinking (optional)
+# RewriteCond %{HTTP_REFERER} !^$
+# RewriteCond %{HTTP_REFERER} !^https?://(www\.)?redknotconsulting\.com [NC]
+# RewriteRule \.(jpg|jpeg|png|gif|webp)$ - [F]
+
+# ===============================================
+# 10. PHP SETTINGS
+# ===============================================
+
+# Increase PHP limits (if allowed by hosting)
+# php_value upload_max_filesize 10M
+# php_value post_max_size 10M
+# php_value max_execution_time 300
+# php_value max_input_vars 3000
+
+# ===============================================
+# 11. PREVENT ACCESS TO LOGS AND SENSITIVE FILES
+# ===============================================
+
+# Block access to log files
+<FilesMatch "\.(log|txt)$">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
+# Block access to backup files
+<FilesMatch "\.(bak|backup|old|orig|original|tmp)$">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
+# ===============================================
+# 12. OPTIMIZATION
+# ===============================================
+
+# Remove ETags (optional - for performance)
+<IfModule mod_headers.c>
+    Header unset ETag
+</IfModule>
+FileETag None
+
+# Enable Keep-Alive
+<IfModule mod_headers.c>
+    Header set Connection keep-alive
+</IfModule>
+
+# ===============================================
+# 13. SPECIFIC REDIRECTS FOR RED-KNOT IMMIGRATION
+# ===============================================
+
+# Redirect old URLs if any (add as needed)
+# Redirect 301 /old-page.html /new-page.html
+
+# Form processing - ensure PHP files are accessible
+<Files "*.php">
+    Order allow,deny
+    Allow from all
+</Files>
+
+# ===============================================
+# END CONFIGURATION
+# =============================================== 

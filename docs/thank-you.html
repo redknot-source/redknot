@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thank You - Red-Knot Immigration</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css">
+    <style>
+        .thank-you-container {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(135deg, #0A4C96 0%, #B68A35 100%);
+        }
+        .thank-you-card {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            padding: 3rem;
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .success-icon {
+            width: 80px;
+            height: 80px;
+            background: #28a745;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 2rem;
+            color: white;
+            font-size: 2rem;
+        }
+        .btn-home {
+            background: #0A4C96;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 8px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .btn-home:hover {
+            background: #083a75;
+            transform: translateY(-2px);
+        }
+        .contact-info {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-top: 2rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="thank-you-container">
+        <div class="container">
+            <div class="thank-you-card">
+                <div class="success-icon">
+                    ✓
+                </div>
+                
+                <h1 class="mb-4" style="color: #0A4C96; font-weight: 700;">Thank You!</h1>
+                
+                <div id="message-content">
+                    <!-- Default message -->
+                    <p class="lead mb-4">Your submission has been received successfully. Our team will review your information and get back to you within 24 hours.</p>
+                </div>
+                
+                <div class="contact-info">
+                    <h5 style="color: #B68A35; margin-bottom: 1rem;">Need Immediate Assistance?</h5>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <strong>📧 Email:</strong><br>
+                            <a href="mailto:contact@redknotconsulting.com">contact@redknotconsulting.com</a>
+                        </div>
+                        <div class="col-md-6">
+                            <strong>📱 WhatsApp:</strong><br>
+                            <a href="https://wa.me/971501234567" target="_blank">+971 50 123 4567</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="mt-4">
+                    <a href="/" class="btn btn-primary btn-home me-3">Return Home</a>
+                    <a href="/about.html" class="btn btn-outline-primary">Learn More About Us</a>
+                </div>
+                
+                <div class="mt-4">
+                    <small class="text-muted">
+                        Follow us on social media for visa updates and immigration news
+                    </small>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Customize message based on form type
+        document.addEventListener('DOMContentLoaded', function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const formType = urlParams.get('type');
+            const messageContent = document.getElementById('message-content');
+            
+            switch(formType) {
+                case 'contact':
+                    messageContent.innerHTML = `
+                        <p class="lead mb-4">Thank you for contacting Red-Knot Immigration! We've received your inquiry and our expert consultants will respond within 24 hours.</p>
+                        <p>We specialize in Dubai work visas and will provide you with personalized guidance for your immigration journey.</p>
+                    `;
+                    break;
+                    
+                case 'assessment':
+                    messageContent.innerHTML = `
+                        <p class="lead mb-4">Your free visa assessment request has been submitted successfully!</p>
+                        <p>Our immigration experts will analyze your profile and send you a detailed assessment report within 24-48 hours.</p>
+                        <p><strong>What's Next:</strong></p>
+                        <ul class="text-start">
+                            <li>Profile evaluation by certified consultants</li>
+                            <li>Eligibility assessment for your target country</li>
+                            <li>Personalized immigration strategy</li>
+                            <li>Documentation requirements</li>
+                        </ul>
+                    `;
+                    break;
+                    
+                case 'newsletter':
+                    messageContent.innerHTML = `
+                        <p class="lead mb-4">Welcome to the Red-Knot Immigration newsletter family!</p>
+                        <p>You'll receive regular updates about:</p>
+                        <ul class="text-start">
+                            <li>Latest visa policy changes</li>
+                            <li>Immigration opportunities</li>
+                            <li>Success stories from our clients</li>
+                            <li>Expert tips and guides</li>
+                        </ul>
+                    `;
+                    break;
+                    
+                default:
+                    // Keep default message
+                    break;
+            }
+        });
+    </script>
+</body>
+</html> 
