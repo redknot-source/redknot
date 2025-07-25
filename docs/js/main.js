@@ -348,7 +348,7 @@
   });
 
   /**
-   * Visa Eligibility Form Handler
+   * Visa Application Form Handler
    */
   const eligibilityForm = select('#eligibility-form');
   if (eligibilityForm) {
@@ -356,101 +356,134 @@
       e.preventDefault();
       
       const formData = new FormData(this);
-      const data = Object.fromEntries(formData);
       
-      // Basic eligibility assessment logic
-      let eligibilityScore = 0;
-      let recommendations = [];
-      
-      // Nationality scoring
-      const highDemandNationalities = ['india', 'pakistan', 'bangladesh', 'philippines'];
-      if (highDemandNationalities.includes(data.nationality)) {
-        eligibilityScore += 25;
-      } else {
-        eligibilityScore += 15;
+      // Validate file upload
+      const resumeFile = formData.get('resume');
+      if (resumeFile && resumeFile.size > 5 * 1024 * 1024) { // 5MB limit
+        alert('Resume file size must be less than 5MB');
+        return;
       }
       
-      // Education scoring
-      const educationScores = {
-        'high-school': 15,
-        'diploma': 20,
-        'bachelor': 25,
-        'master': 30
+      // Show loading state
+      const submitButton = this.querySelector('button[type="submit"]');
+      const originalText = submitButton.textContent;
+      submitButton.textContent = 'Submitting...';
+      submitButton.disabled = true;
+      
+      // Prepare data for submission
+      const data = {
+        name: formData.get('name'),
+        phone: formData.get('phone'),
+        email: formData.get('email'),
+        nationality: formData.get('nationality'),
+        preferred_country: formData.get('preferred_country'),
+        timestamp: new Date().toISOString()
       };
-      eligibilityScore += educationScores[data.education] || 10;
       
-      // Experience scoring
-      const experienceScores = {
-        '0-2': 15,
-        '3-5': 20,
-        '6-10': 25,
-        '10+': 30
-      };
-      eligibilityScore += experienceScores[data.experience] || 10;
+      // Create WhatsApp message
+      const whatsappMessage = `Hi RedKnot Consultants,
       
-      // Field scoring
-      const highDemandFields = ['construction', 'hospitality', 'manufacturing'];
-      if (highDemandFields.includes(data.field)) {
-        eligibilityScore += 30;
-        recommendations.push(`High demand for ${data.field} workers in Dubai`);
-      } else {
-        eligibilityScore += 20;
-      }
+New Application Submitted:
+Name: ${data.name}
+Phone: ${data.phone}
+Email: ${data.email}
+Nationality: ${data.nationality}
+Preferred Country: ${data.preferred_country}
+
+I have submitted my resume through the website form. Please review my application for visa assistance.
+
+Thank you!`;
       
-      // Generate recommendations
-      if (eligibilityScore >= 80) {
-        recommendations.unshift('Excellent visa prospects! You meet most requirements.');
-      } else if (eligibilityScore >= 60) {
-        recommendations.unshift('Good visa prospects with proper documentation.');
-      } else {
-        recommendations.unshift('Moderate prospects. Additional qualifications may help.');
-      }
-      
-      // Show results
-      showEligibilityResults(data, eligibilityScore, recommendations);
-      
-      // Send to Telegram (if configured)
-      sendFormDataToTelegram('eligibility', data);
+      // Simulate form submission (in production, this would send to your backend)
+      setTimeout(() => {
+        // Reset button state
+        submitButton.textContent = originalText;
+        submitButton.disabled = false;
+        
+        // Show success message
+        showApplicationSuccess(data);
+        
+        // Optional: Send to WhatsApp
+        const encodedMessage = encodeURIComponent(whatsappMessage);
+        const whatsappUrl = `https://wa.me/+971XXXXXXXXX?text=${encodedMessage}`;
+        
+        // You can uncomment the line below to auto-open WhatsApp
+        // window.open(whatsappUrl, '_blank');
+        
+        // Send form data for tracking (if configured)
+        sendFormDataToTelegram('application', data);
+        
+        // Reset form
+        this.reset();
+        
+      }, 2000); // Simulate processing time
     });
   }
 
   /**
-   * Show eligibility assessment results
+   * Show application success message
    */
-  function showEligibilityResults(data, score, recommendations) {
+  function showApplicationSuccess(data) {
     const resultHtml = `
-      <div class="eligibility-results mt-4 p-4 border rounded bg-light">
-        <h4 class="text-primary">Assessment Results for ${data.name}</h4>
-        <div class="score-indicator mb-3">
-          <strong>Eligibility Score: ${score}/100</strong>
-          <div class="progress mt-2">
-            <div class="progress-bar ${score >= 80 ? 'bg-success' : score >= 60 ? 'bg-warning' : 'bg-info'}" 
-                 style="width: ${score}%"></div>
+      <div class="application-results mt-4 p-4 border rounded" style="background: linear-gradient(135deg, #d4edda, #c3e6cb); border-color: #28a745;">
+        <div class="text-center">
+          <i class="fas fa-check-circle text-success mb-3" style="font-size: 3rem;"></i>
+          <h4 class="text-success mb-3">Application Submitted Successfully!</h4>
+          <p class="lead mb-4">Thank you, <strong>${data.name}</strong>! We've received your application for <strong>${data.preferred_country}</strong>.</p>
+        </div>
+        
+        <div class="row">
+          <div class="col-md-6">
+            <div class="submission-details">
+              <h6 class="text-dark mb-3"><i class="fas fa-info-circle"></i> Application Details:</h6>
+              <ul class="list-unstyled">
+                <li><strong>Name:</strong> ${data.name}</li>
+                <li><strong>Phone:</strong> ${data.phone}</li>
+                <li><strong>Email:</strong> ${data.email}</li>
+                <li><strong>Nationality:</strong> ${data.nationality}</li>
+                <li><strong>Preferred Country:</strong> ${data.preferred_country}</li>
+                <li><strong>Resume:</strong> Uploaded successfully</li>
+              </ul>
+            </div>
+          </div>
+          
+          <div class="col-md-6">
+            <div class="next-steps">
+              <h6 class="text-dark mb-3"><i class="fas fa-clock"></i> What's Next?</h6>
+              <ul class="timeline-list">
+                <li><strong>Within 2 hours:</strong> Email confirmation</li>
+                <li><strong>Within 24 hours:</strong> Initial review of your resume</li>
+                <li><strong>Within 48 hours:</strong> Personal consultation call</li>
+                <li><strong>Next steps:</strong> Customized visa pathway</li>
+              </ul>
+            </div>
           </div>
         </div>
-        <div class="recommendations">
-          <h5>Recommendations:</h5>
-          <ul>
-            ${recommendations.map(rec => `<li>${rec}</li>`).join('')}
-          </ul>
-        </div>
-        <div class="next-steps mt-3">
-          <p><strong>Next Steps:</strong></p>
-          <p>Our team will contact you on ${data.phone} within 24 hours to discuss your application process.</p>
-          <a href="https://wa.me/971XXXXXXXXX?text=Hi, I completed the eligibility assessment and scored ${score}/100. Please help me with the next steps." 
-             class="btn btn-success btn-sm">
-            <i class="fab fa-whatsapp"></i> Chat on WhatsApp Now
+        
+        <div class="action-buttons text-center mt-4">
+          <a href="https://wa.me/+971XXXXXXXXX?text=Hi, I just submitted my application for ${data.preferred_country}. My name is ${data.name}. When can we discuss the next steps?" 
+             class="btn btn-success btn-lg me-3">
+            <i class="fab fa-whatsapp"></i> Chat on WhatsApp
           </a>
+          <button onclick="this.closest('.application-results').remove()" class="btn btn-secondary">
+            <i class="fas fa-times"></i> Close
+          </button>
         </div>
       </div>
     `;
+    
+    // Remove any existing results
+    const existingResults = select('.application-results');
+    if (existingResults) {
+      existingResults.remove();
+    }
     
     // Insert results after the form
     eligibilityForm.insertAdjacentHTML('afterend', resultHtml);
     
     // Scroll to results
     setTimeout(() => {
-      const results = select('.eligibility-results');
+      const results = select('.application-results');
       if (results) {
         results.scrollIntoView({ behavior: 'smooth', block: 'center' });
       }
@@ -491,15 +524,15 @@
     
     let message = '';
     
-    if (formType === 'eligibility') {
+    if (formType === 'application') {
       message = `
-🔔 NEW ELIGIBILITY ASSESSMENT
+🔔 NEW VISA APPLICATION
 👤 Name: ${data.name}
 📱 Phone: ${data.phone}
+📧 Email: ${data.email}
 🌍 Nationality: ${data.nationality}
-🎓 Education: ${data.education}
-💼 Experience: ${data.experience}
-🏢 Field: ${data.field}
+🎯 Preferred Country: ${data.preferred_country}
+📄 Resume: Uploaded
 ⏰ Time: ${new Date().toLocaleString()}
       `;
     } else if (formType === 'contact') {
