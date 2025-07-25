@@ -130,7 +130,7 @@
   })
 
   /**
-   * Mobile nav dropdowns activate
+   * Mobile nav dropdowns activate - Support both click and hover
    */
   on('click', '.navbar .dropdown > a', function(e) {
     if (select('#navbar').classList.contains('navbar-mobile')) {
@@ -152,6 +152,41 @@
       const menu = this.nextElementSibling
       if (menu) {
         menu.classList.toggle('dropdown-active')
+      }
+    }
+  }, true)
+
+  /**
+   * Mobile nav dropdowns hover support
+   */
+  on('mouseenter', '.navbar .dropdown', function(e) {
+    if (select('#navbar').classList.contains('navbar-mobile')) {
+      // Close other dropdowns
+      const allDropdowns = select('.navbar .dropdown', true)
+      allDropdowns.forEach(dropdown => {
+        if (dropdown !== this) {
+          dropdown.classList.remove('dropdown-active')
+          const menu = dropdown.querySelector('.dropdown-menu')
+          if (menu) menu.classList.remove('dropdown-active')
+        }
+      })
+      
+      // Open current dropdown
+      this.classList.add('dropdown-active')
+      const menu = this.querySelector('.dropdown-menu')
+      if (menu) {
+        menu.classList.add('dropdown-active')
+      }
+    }
+  }, true)
+
+  on('mouseleave', '.navbar .dropdown', function(e) {
+    if (select('#navbar').classList.contains('navbar-mobile')) {
+      // Close current dropdown
+      this.classList.remove('dropdown-active')
+      const menu = this.querySelector('.dropdown-menu')
+      if (menu) {
+        menu.classList.remove('dropdown-active')
       }
     }
   }, true)
