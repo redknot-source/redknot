@@ -143,8 +143,8 @@
         </div>
 
           <div class="col-lg-8">
-            <form name="contact" method="POST" data-netlify="true" data-netlify-recaptcha="true" class="php-email-form">
-              <input type="hidden" name="form-name" value="contact">
+            <form action="forms/contact-form.php" method="POST" class="php-email-form">
+              <input type="hidden" name="form_type" value="contact">
               
               <div class="row">
                 <div class="col-md-6 form-group">
@@ -181,10 +181,8 @@
                 <textarea class="form-control" name="message" rows="7" placeholder="Message" required></textarea>
               </div>
               
-              <div data-netlify-recaptcha="true"></div>
-              
-              <div class="text-center">
-                <button type="submit">Send Message</button>
+              <div class="text-center mt-4">
+                <button type="submit" class="btn btn-primary">Send Message</button>
               </div>
             </form>
           </div>
@@ -212,7 +210,7 @@
             <div class="office-flag">
               <i class="fas fa-building" style="color: var(--uae-blue); font-size: 2.5rem;"></i>
             </div>
-            <h3>UAE Headquarters</h3>
+            <h3>UAE Office</h3>
             <div class="office-info">
               <div class="info-row">
                 <i class="bi bi-geo-alt"></i>
@@ -225,7 +223,7 @@
                 <i class="bi bi-telephone"></i>
                 <div>
                   <h5>Phone</h5>
-                  <p>+971-XX-XXX-XXXX</p>
+                  <p>+971-50-144-0956</p>
                 </div>
               </div>
               <div class="info-row">
@@ -258,14 +256,14 @@
                 <i class="bi bi-geo-alt"></i>
                 <div>
                   <h5>Address</h5>
-                  <p>Level XX, XXX Collins Street<br>Melbourne, VIC 3000<br>Australia</p>
+                  <p>Beattie Rd, Coomera,<br>Gold Coast, QLD 4209<br>Australia</p>
                 </div>
               </div>
               <div class="info-row">
                 <i class="bi bi-telephone"></i>
                 <div>
                   <h5>Phone</h5>
-                  <p>+61-X-XXXX-XXXX</p>
+                  <p>+61-7-5538-9260</p>
                 </div>
               </div>
               <div class="info-row">
@@ -292,27 +290,27 @@
             <div class="office-flag">
               <i class="fas fa-building" style="color: var(--success-green); font-size: 2.5rem;"></i>
             </div>
-            <h3>India Office</h3>
+            <h3>India Headquarters</h3>
             <div class="office-info">
               <div class="info-row">
                 <i class="bi bi-geo-alt"></i>
                 <div>
                   <h5>Address</h5>
-                  <p>XXX Business Center<br>Koramangala, Bangalore<br>Karnataka - 560034, India</p>
+                  <p>High Calibre Business Center<br>Hennur Main Road, Bangalore<br>Karnataka - 560077, India</p>
                 </div>
               </div>
               <div class="info-row">
                 <i class="bi bi-telephone"></i>
                 <div>
                   <h5>Phone</h5>
-                  <p>+91-XXXXX-XXXXX</p>
+                  <p>+91-81052-62944</p>
                 </div>
               </div>
               <div class="info-row">
                 <i class="bi bi-envelope"></i>
                 <div>
                   <h5>Email</h5>
-                  <p>india@redknot.ae</p>
+                  <p>info@redknot.ae</p>
                 </div>
               </div>
               <div class="info-row">

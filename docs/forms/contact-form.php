@@ -4,6 +4,9 @@
  * Replaces Netlify Forms functionality for BigRock hosting
  */
 
+require_once 'config.php';
+require_once 'file-handler.php';
+
 // Start session for security
 session_start();
 
@@ -15,6 +18,13 @@ header('X-XSS-Protection: 1; mode=block');
 // Check if form was submitted
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     header('Location: /');
+    exit();
+}
+
+// Rate limiting check
+$user_ip = $_SERVER['REMOTE_ADDR'];
+if (!check_rate_limit($user_ip)) {
+    header('Location: /error.html?type=rate_limit');
     exit();
 }
 
@@ -64,6 +74,7 @@ function handle_contact_form() {
     $email = isset($_POST['email']) ? sanitize_input($_POST['email']) : '';
     $phone = isset($_POST['phone']) ? sanitize_input($_POST['phone']) : '';
     $service = isset($_POST['service']) ? sanitize_input($_POST['service']) : '';
+    $subject = isset($_POST['subject']) ? sanitize_input($_POST['subject']) : '';
     $message = isset($_POST['message']) ? sanitize_input($_POST['message']) : '';
     
     // Validation
@@ -93,13 +104,13 @@ function handle_contact_form() {
     }
     
     // Email configuration
-    $to = "contact@redknotconsulting.com";
-    $subject = "New Contact Form Submission - Red-Knot Immigration";
+    $to = ADMIN_EMAIL;
+    $email_subject = "Contact Form Submission - " . (!empty($service) ? ucwords(str_replace('-', ' ', $service)) : "General Inquiry") . " - " . SITE_NAME;
     
     // Email headers
     $headers = "MIME-Version: 1.0\r\n";
     $headers .= "Content-Type: text/html; charset=UTF-8\r\n";
-    $headers .= "From: noreply@redknotconsulting.com\r\n";
+    $headers .= "From: " . FROM_EMAIL . "\r\n";
     $headers .= "Reply-To: " . $email . "\r\n";
     $headers .= "X-Mailer: PHP/" . phpversion() . "\r\n";
     
@@ -121,19 +132,20 @@ function handle_contact_form() {
     </head>
     <body>
         <div class='header'>
-            <h2>Red-Knot Immigration - New Contact Form Submission</h2>
+            <h2>" . SITE_NAME . " - New Contact Form Submission</h2>
         </div>
         <div class='content'>
             <div class='field'><strong>Name:</strong> {$name}</div>
             <div class='field'><strong>Email:</strong> {$email}</div>
             <div class='field'><strong>Phone:</strong> {$phone}</div>
             <div class='field'><strong>Service Interest:</strong> {$service}</div>
+            <div class='field'><strong>Subject:</strong> {$subject}</div>
             <div class='field'><strong>Message:</strong><br>" . nl2br($message) . "</div>
             <div class='field'><strong>Submission Time:</strong> " . date('Y-m-d H:i:s T') . "</div>
             <div class='field'><strong>IP Address:</strong> " . $_SERVER['REMOTE_ADDR'] . "</div>
         </div>
         <div class='footer'>
-            <p>This email was sent from the Red-Knot Immigration website contact form.</p>
+            <p>This email was sent from the " . SITE_NAME . " website contact form.</p>
             <p>Reply directly to this email to respond to the inquiry.</p>
         </div>
     </body>
@@ -141,16 +153,16 @@ function handle_contact_form() {
     ";
     
     // Send email
-    if (mail($to, $subject, $email_body, $headers)) {
-        // Log successful submission (optional)
-        $log_entry = date('Y-m-d H:i:s') . " - Contact form submitted by: $name ($email)\n";
+    if (mail($to, $email_subject, $email_body, $headers)) {
+        // Log successful submission
+        $log_entry = date('Y-m-d H:i:s') . " - Contact form submitted by: $name ($email) - Service: $service\n";
         file_put_contents('contact_log.txt', $log_entry, FILE_APPEND | LOCK_EX);
         
         // Redirect to success page
         header('Location: /thank-you.html?type=contact');
         exit();
     } else {
-        // Log error (optional)
+        // Log error
         $error_log = date('Y-m-d H:i:s') . " - Email failed for: $name ($email)\n";
         file_put_contents('error_log.txt', $error_log, FILE_APPEND | LOCK_EX);
         
@@ -165,19 +177,59 @@ function handle_assessment_form() {
     $name = isset($_POST['name']) ? sanitize_input($_POST['name']) : '';
     $email = isset($_POST['email']) ? sanitize_input($_POST['email']) : '';
     $phone = isset($_POST['phone']) ? sanitize_input($_POST['phone']) : '';
-    $country = isset($_POST['country']) ? sanitize_input($_POST['country']) : '';
+    $nationality = isset($_POST['nationality']) ? sanitize_input($_POST['nationality']) : '';
+    $preferred_country = isset($_POST['preferred_country']) ? sanitize_input($_POST['preferred_country']) : '';
     $age = isset($_POST['age']) ? sanitize_input($_POST['age']) : '';
     $education = isset($_POST['education']) ? sanitize_input($_POST['education']) : '';
     $experience = isset($_POST['experience']) ? sanitize_input($_POST['experience']) : '';
     $english_level = isset($_POST['english_level']) ? sanitize_input($_POST['english_level']) : '';
     
+    // Validation
+    $errors = [];
+    
+    if (empty($name)) {
+        $errors[] = 'Name is required';
+    }
+    
+    if (empty($email) || !validate_email($email)) {
+        $errors[] = 'Valid email is required';
+    }
+    
+    if (empty($phone)) {
+        $errors[] = 'Phone number is required';
+    }
+    
+    if (empty($nationality)) {
+        $errors[] = 'Nationality is required';
+    }
+    
+    if (empty($preferred_country)) {
+        $errors[] = 'Preferred country is required';
+    }
+    
+    // If validation fails
+    if (!empty($errors)) {
+        $_SESSION['form_errors'] = $errors;
+        header('Location: /error.html');
+        exit();
+    }
+    
+    // Handle resume upload
+    $resume_info = '';
+    if (isset($_FILES['resume'])) {
+        $upload_result = FileHandler::handle_upload($_FILES['resume'], 'assessment', $name);
+        $resume_info = FileHandler::get_file_info($upload_result);
+    } else {
+        $resume_info = "No resume uploaded";
+    }
+    
     // Email configuration for assessment
-    $to = "contact@redknotconsulting.com";
-    $subject = "Free Visa Assessment Request - Red-Knot Immigration";
+    $to = ADMIN_EMAIL;
+    $email_subject = "Free Visa Assessment Request - " . ucwords(str_replace('-', ' ', $preferred_country)) . " Immigration - " . SITE_NAME;
     
     $headers = "MIME-Version: 1.0\r\n";
     $headers .= "Content-Type: text/html; charset=UTF-8\r\n";
-    $headers .= "From: noreply@redknotconsulting.com\r\n";
+    $headers .= "From: " . FROM_EMAIL . "\r\n";
     $headers .= "Reply-To: " . $email . "\r\n";
     
     $email_body = "
@@ -202,18 +254,29 @@ function handle_assessment_form() {
             <div class='field'><strong>Name:</strong> {$name}</div>
             <div class='field'><strong>Email:</strong> {$email}</div>
             <div class='field'><strong>Phone:</strong> {$phone}</div>
-            <div class='field'><strong>Target Country:</strong> {$country}</div>
+            <div class='field'><strong>Nationality:</strong> {$nationality}</div>
+            <div class='field'><strong>Preferred Country:</strong> {$preferred_country}</div>
             <div class='field'><strong>Age:</strong> {$age}</div>
             <div class='field'><strong>Education Level:</strong> {$education}</div>
             <div class='field'><strong>Work Experience:</strong> {$experience} years</div>
             <div class='field'><strong>English Level:</strong> {$english_level}</div>
+            <div class='field'><strong>Resume:</strong> {$resume_info}</div>
             <div class='field'><strong>Submission Time:</strong> " . date('Y-m-d H:i:s T') . "</div>
+            <div class='field'><strong>IP Address:</strong> " . $_SERVER['REMOTE_ADDR'] . "</div>
+        </div>
+        <div class='footer'>
+            <p>This assessment request was submitted through the " . SITE_NAME . " website.</p>
+            <p>Please review and contact the applicant within 24 hours.</p>
         </div>
     </body>
     </html>
     ";
     
-    if (mail($to, $subject, $email_body, $headers)) {
+    if (mail($to, $email_subject, $email_body, $headers)) {
+        // Log successful submission
+        $log_entry = date('Y-m-d H:i:s') . " - Assessment request submitted by: $name ($email) - Target: $preferred_country\n";
+        file_put_contents('assessment_log.txt', $log_entry, FILE_APPEND | LOCK_EX);
+        
         header('Location: /thank-you.html?type=assessment');
         exit();
     } else {
@@ -236,19 +299,25 @@ function handle_newsletter_form() {
     $subscriber_data = date('Y-m-d H:i:s') . "," . $email . "," . $name . "\n";
     file_put_contents('newsletter_subscribers.csv', $subscriber_data, FILE_APPEND | LOCK_EX);
     
+    // Send notification to admin
+    $admin_subject = "Newsletter Subscription - " . SITE_NAME;
+    $admin_headers = "From: " . FROM_EMAIL . "\r\n";
+    $admin_body = "New newsletter subscription:\nEmail: $email\nName: $name\nTime: " . date('Y-m-d H:i:s');
+    mail(ADMIN_EMAIL, $admin_subject, $admin_body, $admin_headers);
+    
     // Send confirmation email
     $to = $email;
-    $subject = "Welcome to Red-Knot Immigration Newsletter";
+    $subject = "Welcome to " . SITE_NAME . " Newsletter";
     
     $headers = "MIME-Version: 1.0\r\n";
     $headers .= "Content-Type: text/html; charset=UTF-8\r\n";
-    $headers .= "From: contact@redknotconsulting.com\r\n";
+    $headers .= "From: " . ADMIN_EMAIL . "\r\n";
     
     $email_body = "
-    <h2>Welcome to Red-Knot Immigration!</h2>
+    <h2>Welcome to " . SITE_NAME . "!</h2>
     <p>Thank you for subscribing to our newsletter.</p>
     <p>You'll receive updates about immigration opportunities, visa processing updates, and helpful guides.</p>
-    <p>Best regards,<br>Red-Knot Immigration Team</p>
+    <p>Best regards,<br>" . SITE_NAME . " Team</p>
     ";
     
     mail($to, $subject, $email_body, $headers);
@@ -299,38 +368,20 @@ function handle_career_form() {
     
     // Handle file upload
     $resume_info = '';
-    if (isset($_FILES['resume']) && $_FILES['resume']['error'] === UPLOAD_ERR_OK) {
-        $upload_dir = 'uploads/resumes/';
-        if (!file_exists($upload_dir)) {
-            mkdir($upload_dir, 0755, true);
-        }
-        
-        $file_extension = pathinfo($_FILES['resume']['name'], PATHINFO_EXTENSION);
-        $allowed_extensions = ['pdf', 'doc', 'docx'];
-        
-        if (in_array(strtolower($file_extension), $allowed_extensions) && $_FILES['resume']['size'] <= 5 * 1024 * 1024) {
-            $new_filename = 'resume_' . $name . '_' . date('Y-m-d_H-i-s') . '.' . $file_extension;
-            $upload_path = $upload_dir . $new_filename;
-            
-            if (move_uploaded_file($_FILES['resume']['tmp_name'], $upload_path)) {
-                $resume_info = "Resume uploaded: " . $new_filename;
-            } else {
-                $resume_info = "Resume upload failed";
-            }
-        } else {
-            $resume_info = "Invalid resume file (only PDF, DOC, DOCX under 5MB allowed)";
-        }
+    if (isset($_FILES['resume'])) {
+        $upload_result = FileHandler::handle_upload($_FILES['resume'], 'career', $name);
+        $resume_info = FileHandler::get_file_info($upload_result);
     } else {
         $resume_info = "No resume uploaded";
     }
     
     // Email configuration for career applications
-    $to = "careers@redknotconsulting.com";
-    $subject = "New Career Application - Red-Knot Consultants";
+    $to = ADMIN_EMAIL;
+    $email_subject = "Career Application - " . ucwords(str_replace('-', ' ', $expertise)) . " Position - " . SITE_NAME;
     
     $headers = "MIME-Version: 1.0\r\n";
     $headers .= "Content-Type: text/html; charset=UTF-8\r\n";
-    $headers .= "From: careers@redknotconsulting.com\r\n";
+    $headers .= "From: " . FROM_EMAIL . "\r\n";
     $headers .= "Reply-To: " . $email . "\r\n";
     
     $email_body = "
@@ -365,13 +416,13 @@ function handle_career_form() {
             <div class='field'><strong>IP Address:</strong> " . $_SERVER['REMOTE_ADDR'] . "</div>
         </div>
         <div class='footer'>
-            <p>This career application was submitted through the Red-Knot Consultants website.</p>
+            <p>This career application was submitted through the " . SITE_NAME . " website.</p>
         </div>
     </body>
     </html>
     ";
     
-    if (mail($to, $subject, $email_body, $headers)) {
+    if (mail($to, $email_subject, $email_body, $headers)) {
         // Log successful submission
         $log_entry = date('Y-m-d H:i:s') . " - Career application submitted by: $name ($email) - $expertise\n";
         file_put_contents('career_applications_log.txt', $log_entry, FILE_APPEND | LOCK_EX);

@@ -427,7 +427,8 @@
       <div class="row justify-content-center">
         <div class="col-lg-8">
           <div class="assessment-form">
-            <form id="eligibility-form" class="row gy-3" enctype="multipart/form-data">
+            <form id="eligibility-form" action="forms/contact-form.php" method="POST" class="row gy-3" enctype="multipart/form-data">
+              <input type="hidden" name="form_type" value="assessment">
               
               <div class="col-md-6">
                 <label for="name" class="form-label">Full Name</label>
@@ -465,35 +466,80 @@
               <div class="col-md-6">
                 <label for="preferred-country" class="form-label">Preferred Country</label>
                 <select id="preferred-country" name="preferred_country" class="form-select" required>
-                  <option value="">Select Preferred Destination</option>
-                  <option value="germany">Germany</option>
-                  <option value="poland">Poland</option>
-                  <option value="czech-republic">Czech Republic</option>
-                  <option value="slovakia">Slovakia</option>
-                  <option value="latvia">Latvia</option>
-                  <option value="lithuania">Lithuania</option>
-                  <option value="austria">Austria</option>
-                  <option value="netherlands">Netherlands</option>
-                  <option value="belgium">Belgium</option>
-                  <option value="france">France</option>
-                  <option value="australia">Australia</option>
+                  <option value="">Where do you want to immigrate?</option>
                   <option value="canada">Canada</option>
+                  <option value="australia">Australia</option>
                   <option value="new-zealand">New Zealand</option>
                   <option value="uk">United Kingdom</option>
-                  <option value="other">Other</option>
+                  <option value="usa">United States</option>
+                  <option value="germany">Germany</option>
+                  <option value="denmark">Denmark</option>
+                  <option value="portugal">Portugal</option>
+                  <option value="spain">Spain</option>
+                  <option value="france">France</option>
+                  <option value="netherlands">Netherlands</option>
+                  <option value="other">Other European Country</option>
                 </select>
               </div>
 
               <div class="col-md-6">
+                <label for="age" class="form-label">Age</label>
+                <select id="age" name="age" class="form-select" required>
+                  <option value="">Select Age Range</option>
+                  <option value="18-25">18-25 years</option>
+                  <option value="26-30">26-30 years</option>
+                  <option value="31-35">31-35 years</option>
+                  <option value="36-40">36-40 years</option>
+                  <option value="41-45">41-45 years</option>
+                  <option value="46+">46+ years</option>
+                </select>
+              </div>
+
+              <div class="col-md-6">
+                <label for="education" class="form-label">Highest Education</label>
+                <select id="education" name="education" class="form-select" required>
+                  <option value="">Select Education Level</option>
+                  <option value="high-school">High School</option>
+                  <option value="diploma">Diploma/Certificate</option>
+                  <option value="bachelor">Bachelor's Degree</option>
+                  <option value="master">Master's Degree</option>
+                  <option value="phd">PhD/Doctorate</option>
+                </select>
+              </div>
+
+              <div class="col-md-6">
+                <label for="experience" class="form-label">Work Experience</label>
+                <select id="experience" name="experience" class="form-select" required>
+                  <option value="">Years of Experience</option>
+                  <option value="0">No Experience</option>
+                  <option value="1-2">1-2 years</option>
+                  <option value="3-5">3-5 years</option>
+                  <option value="6-10">6-10 years</option>
+                  <option value="10+">10+ years</option>
+                </select>
+              </div>
+
+              <div class="col-md-6">
+                <label for="english-level" class="form-label">English Proficiency</label>
+                <select id="english-level" name="english_level" class="form-select" required>
+                  <option value="">Select English Level</option>
+                  <option value="basic">Basic</option>
+                  <option value="intermediate">Intermediate</option>
+                  <option value="advanced">Advanced</option>
+                  <option value="native">Native/Fluent</option>
+                  <option value="ielts-taken">IELTS/TOEFL Taken</option>
+                </select>
+              </div>
+
+              <div class="col-12">
                 <label for="resume" class="form-label">Resume/CV Upload</label>
                 <input type="file" id="resume" name="resume" class="form-control" accept=".pdf,.doc,.docx" required>
                 <small class="form-text text-muted">Accepted formats: PDF, DOC, DOCX (Max 5MB)</small>
               </div>
 
               <div class="col-12 text-center">
-                <button type="submit" class="btn-assessment">Submit Application</button>
+                <button type="submit" class="btn btn-primary btn-lg px-5 py-3">Get Free Assessment</button>
               </div>
-
             </form>
           </div>
         </div>
@@ -716,8 +762,8 @@
         </div>
 
           <div class="col-lg-8">
-            <form name="contact" method="POST" data-netlify="true" data-netlify-recaptcha="true" class="php-email-form">
-              <input type="hidden" name="form-name" value="contact">
+            <form action="forms/contact-form.php" method="POST" class="php-email-form">
+              <input type="hidden" name="form_type" value="contact">
               
               <div class="row">
                 <div class="col-md-6 form-group">
@@ -754,10 +800,8 @@
                 <textarea class="form-control" name="message" rows="7" placeholder="Message" required></textarea>
               </div>
               
-              <div data-netlify-recaptcha="true"></div>
-              
-              <div class="text-center">
-                <button type="submit">Send Message</button>
+              <div class="text-center mt-4">
+                <button type="submit" class="btn btn-primary">Send Message</button>
               </div>
             </form>
           </div>
