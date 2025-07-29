@@ -2246,6 +2246,28 @@ section {
   background: rgba(255, 255, 255, 0.7);
   z-index: -1;
 }
+
+.study-abroad-page-bg {
+  background-image: url('images/georgia1.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  position: relative;
+  min-height: 100vh;
+}
+
+.study-abroad-page-bg::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.7);
+  z-index: -1;
+}
+
 .about-hero {
   padding: 140px 0 40px 0;
   background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(10, 76, 150, 0.7));
@@ -2929,22 +2951,24 @@ textarea:focus {
 
 /* CTA Section */
 .cta-section {
-  background: linear-gradient(135deg, var(--slate-50) 0%, var(--pure-white) 100%);
-  border-radius: 8px;
-  padding: 25px;
-  border-left: 4px solid var(--uae-gold);
-  margin-top: 30px;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 60px 40px;
+  border-radius: 20px;
+  color: var(--pure-white);
+  margin: 60px 0;
+  backdrop-filter: blur(10px);
 }
 
-.cta-section h6 {
-  color: var(--charcoal);
-  font-weight: 600;
-  margin-bottom: 10px;
+.cta-section h4 {
+  color: #ffffff !important;
+  font-weight: 700;
+  margin-bottom: 20px;
+  text-shadow: 0 0 15px rgba(182, 138, 53, 1), 2px 2px 4px rgba(0,0,0,0.5);
 }
 
-.cta-section p {
-  color: var(--slate-600);
-  margin-bottom: 15px;
+.cta-section .lead {
+  color: #ffffff !important;
+  margin-bottom: 30px;
 }
 
 /* Additional Programs */
@@ -3573,3 +3597,453 @@ textarea:focus {
     margin-bottom: 20px;
   }
 }
+
+/*--------------------------------------------------------------
+# Tourist Visa Page Styles
+--------------------------------------------------------------*/
+
+/* Tourist Visa Page Background */
+.tourist-visa-page-bg {
+  background: linear-gradient(135deg, rgba(10, 76, 150, 0.7), rgba(182, 138, 53, 0.7)), url('images/hero-berlin.jpg');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  min-height: 100vh;
+}
+
+/* All text white on tourist visa page */
+.tourist-visa-page-bg,
+.tourist-visa-page-bg p,
+.tourist-visa-page-bg span,
+.tourist-visa-page-bg li,
+.tourist-visa-page-bg .lead,
+.tourist-visa-page-bg .breadcrumbs a,
+.tourist-visa-page-bg .benefits-list li {
+  color: #ffffff !important;
+}
+
+/* Headings with text shadow on tourist visa page */
+.tourist-visa-page-bg h1,
+.tourist-visa-page-bg h2,
+.tourist-visa-page-bg h3,
+.tourist-visa-page-bg h4,
+.tourist-visa-page-bg h6 {
+  color: #ffffff !important;
+  text-shadow: 0 0 15px rgba(182, 138, 53, 1), 2px 2px 4px rgba(0,0,0,0.5);
+}
+
+/* Exclude country names (h5 in country cards) from text shadow */
+.tourist-visa-page-bg .country-info h5 {
+  text-shadow: none !important;
+}
+
+/* Tourist Visa Section */
+.tourist-visa {
+  padding: 140px 0 80px 0;
+  position: relative;
+}
+
+/* Specific class overrides for tourist visa page */
+.tourist-visa-page-bg .combined-header.text-center.aos-init.aos-animate {
+  padding: 0px;
+}
+
+.tourist-visa-page-bg .row.justify-content-center.mb-5.aos-init.aos-animate {
+  margin-bottom: 0px !important;
+}
+
+/* Countries Gallery */
+.countries-gallery {
+  padding: 60px 0;
+}
+
+.countries-gallery h3 {
+  color: #ffffff !important;
+  font-weight: 700;
+  margin-bottom: 3rem;
+  position: relative;
+  text-shadow: 0 0 15px rgba(182, 138, 53, 1), 2px 2px 4px rgba(0,0,0,0.5);
+}
+
+.countries-gallery h3:after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 3px;
+  background: linear-gradient(90deg, var(--uae-blue), var(--uae-gold));
+  border-radius: 2px;
+}
+
+/* Country Cards */
+.country-card {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(10, 76, 150, 0.08);
+  transition: all 0.15s ease;
+  height: 100%;
+  border: 1px solid rgba(10, 76, 150, 0.05);
+}
+
+.country-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 40px rgba(10, 76, 150, 0.15);
+  border-color: var(--uae-gold);
+}
+
+.country-image {
+  position: relative;
+  height: 200px;
+  overflow: hidden;
+}
+
+.country-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.15s ease;
+}
+
+.country-card:hover .country-image img {
+  transform: scale(1.05);
+}
+
+.country-info {
+  padding: 20px;
+  text-align: center;
+}
+
+.country-info h5 {
+  color: var(--uae-blue) !important;
+  font-weight: 700;
+  margin-bottom: 8px;
+  font-size: 1.1rem;
+  text-shadow: none !important;
+}
+
+.country-info p {
+  color: var(--slate-600) !important;
+  font-size: 0.9rem;
+  margin-bottom: 15px;
+  font-weight: 500;
+}
+
+.country-features {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.country-features span {
+  background: rgba(10, 76, 150, 0.05);
+  color: var(--uae-blue) !important;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  border: 1px solid rgba(10, 76, 150, 0.1);
+  display: flex;
+  align-items: center;
+  flex: 1;
+  justify-content: center;
+  min-width: 110px;
+}
+
+.country-features span i {
+  color: var(--uae-gold) !important;
+}
+
+/* Service Features */
+.service-feature {
+  text-align: center;
+  padding: 25px 15px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.1);
+  margin-bottom: 20px;
+  transition: all 0.15s ease;
+  backdrop-filter: blur(10px);
+}
+
+.service-feature:hover {
+  background: rgba(255, 255, 255, 0.15);
+  transform: translateY(-3px);
+}
+
+.service-feature i {
+  font-size: 2.5rem;
+  margin-bottom: 15px;
+  color: var(--uae-gold) !important;
+}
+
+.service-feature h6 {
+  color: #ffffff !important;
+  font-weight: 600;
+  margin-bottom: 10px;
+  text-shadow: 0 0 15px rgba(182, 138, 53, 1), 2px 2px 4px rgba(0,0,0,0.5);
+}
+
+.service-feature p {
+  color: #ffffff !important;
+  margin-bottom: 0;
+  font-size: 0.9rem;
+}
+
+/* Services Overview */
+.services-overview {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 60px 0;
+  border-radius: 20px;
+  margin: 60px 0;
+  backdrop-filter: blur(10px);
+}
+
+.services-overview h3 {
+  color: #ffffff !important;
+  font-weight: 700;
+  text-shadow: 0 0 15px rgba(182, 138, 53, 1), 2px 2px 4px rgba(0,0,0,0.5);
+}
+
+/* Why Choose Us Section with specific image styling */
+.tourist-visa-page-bg .why-choose-us {
+  padding: 60px 0;
+}
+
+.tourist-visa-page-bg .why-choose-us h3 {
+  color: #ffffff !important;
+  font-weight: 700;
+  margin-bottom: 30px;
+  text-shadow: 0 0 15px rgba(182, 138, 53, 1), 2px 2px 4px rgba(0,0,0,0.5);
+}
+
+.tourist-visa-page-bg .why-choose-us .col-lg-6:first-child {
+  padding-left: 40px;
+}
+
+.tourist-visa-page-bg .why-choose-us img {
+  height: 600px;
+  width: auto;
+  max-width: 100%;
+  object-fit: cover;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.benefits-list {
+  list-style: none;
+  padding: 0;
+}
+
+.benefits-list li {
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  position: relative;
+  padding-left: 25px;
+  color: #ffffff !important;
+  line-height: 1.6;
+}
+
+.benefits-list li:before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  top: 12px;
+  color: var(--uae-gold);
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+
+.benefits-list li:last-child {
+  border-bottom: none;
+}
+
+.benefits-list li strong {
+  color: var(--uae-gold) !important;
+}
+
+/* CTA Section */
+.cta-section {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 60px 40px;
+  border-radius: 20px;
+  color: var(--pure-white);
+  margin: 60px 0;
+  backdrop-filter: blur(10px);
+}
+
+.cta-section h4 {
+  color: #ffffff !important;
+  font-weight: 700;
+  margin-bottom: 20px;
+  text-shadow: 0 0 15px rgba(182, 138, 53, 1), 2px 2px 4px rgba(0,0,0,0.5);
+}
+
+.cta-section .lead {
+  color: #ffffff !important;
+  margin-bottom: 30px;
+}
+
+/* CTA Buttons styling */
+.tourist-visa-page-bg .cta-section .btn {
+  background-color: var(--uae-gold) !important;
+  border-color: var(--uae-gold) !important;
+  color: var(--charcoal) !important;
+  font-weight: 600;
+  transition: all 0.15s ease;
+}
+
+.tourist-visa-page-bg .cta-section .btn:hover {
+  background-color: var(--uae-blue) !important;
+  border-color: var(--uae-blue) !important;
+  color: #ffffff !important;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(10, 76, 150, 0.3);
+}
+
+/* Responsive Design for Tourist Visa Page */
+@media (max-width: 992px) {
+  .tourist-visa-page-bg .why-choose-us .col-lg-6:first-child {
+    padding-left: 20px;
+  }
+  
+  .tourist-visa-page-bg .why-choose-us img {
+    height: 500px;
+  }
+  
+  .countries-gallery {
+    padding: 40px 0;
+  }
+  
+  .country-card {
+    margin-bottom: 20px;
+  }
+  
+  .country-image {
+    height: 180px;
+  }
+  
+  .services-overview {
+    padding: 40px 20px;
+    margin: 40px 0;
+  }
+  
+  .cta-section {
+    padding: 40px 20px;
+    margin: 40px 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .tourist-visa {
+    padding: 120px 0 60px 0;
+  }
+  
+  .tourist-visa-page-bg .why-choose-us .col-lg-6:first-child {
+    padding-left: 15px;
+  }
+  
+  .tourist-visa-page-bg .why-choose-us img {
+    height: 400px;
+    margin-bottom: 30px;
+  }
+  
+  .countries-gallery h3 {
+    font-size: 1.8rem;
+    margin-bottom: 2rem;
+  }
+  
+  .country-image {
+    height: 160px;
+  }
+  
+  .country-info {
+    padding: 15px;
+  }
+  
+  .country-features {
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  .country-features span {
+    min-width: auto;
+    justify-content: center;
+  }
+  
+  .service-feature {
+    padding: 20px 10px;
+  }
+  
+  .service-feature i {
+    font-size: 2rem;
+  }
+  
+  .why-choose-us .row {
+    flex-direction: column-reverse;
+  }
+}
+
+@media (max-width: 576px) {
+  .tourist-visa-page-bg .why-choose-us .col-lg-6:first-child {
+    padding-left: 15px;
+  }
+  
+  .tourist-visa-page-bg .why-choose-us img {
+    height: 300px;
+  }
+  
+  .country-image {
+    height: 140px;
+  }
+  
+  .country-info h5 {
+    font-size: 1rem;
+  }
+  
+  .country-info p {
+    font-size: 0.85rem;
+  }
+  
+  .country-features span {
+    font-size: 0.75rem;
+    padding: 5px 10px;
+  }
+  
+  .cta-section h4 {
+    font-size: 1.3rem;
+  }
+  
+  .cta-section .btn {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+}
+
+/* Animation Enhancements for Tourist Visa */
+@keyframes cardFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.country-card {
+  animation: cardFadeIn 0.3s ease-out forwards;
+}
+
+/* Stagger animation for country cards */
+.country-card:nth-child(1) { animation-delay: 0.05s; }
+.country-card:nth-child(2) { animation-delay: 0.1s; }
+.country-card:nth-child(3) { animation-delay: 0.15s; }
+.country-card:nth-child(4) { animation-delay: 0.2s; }
+.country-card:nth-child(5) { animation-delay: 0.25s; }
+.country-card:nth-child(6) { animation-delay: 0.3s; }
+.country-card:nth-child(7) { animation-delay: 0.35s; }
+.country-card:nth-child(8) { animation-delay: 0.4s; }
