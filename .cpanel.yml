@@ -1,0 +1,51 @@
+---
+deployment:
+  tasks:
+    # Set the deployment path
+    - export DEPLOYPATH=/home/$USER/public_html/
+    
+    # Create necessary directories if they don't exist
+    - mkdir -p $DEPLOYPATH/forms/uploads/resumes
+    - mkdir -p $DEPLOYPATH/forms/uploads/assessments
+    
+    # Copy website files to deployment path
+    - /bin/cp -R docs/* $DEPLOYPATH
+    
+    # Set proper file permissions for security
+    - find $DEPLOYPATH -type f -name "*.html" -exec chmod 644 {} \;
+    - find $DEPLOYPATH -type f -name "*.css" -exec chmod 644 {} \;
+    - find $DEPLOYPATH -type f -name "*.js" -exec chmod 644 {} \;
+    - find $DEPLOYPATH -type f -name "*.php" -exec chmod 644 {} \;
+    - find $DEPLOYPATH -type f -name "*.jpg" -exec chmod 644 {} \;
+    - find $DEPLOYPATH -type f -name "*.png" -exec chmod 644 {} \;
+    - find $DEPLOYPATH -type f -name "*.webp" -exec chmod 644 {} \;
+    - find $DEPLOYPATH -type f -name ".htaccess" -exec chmod 644 {} \;
+    
+    # Set directory permissions
+    - find $DEPLOYPATH -type d -exec chmod 755 {} \;
+    
+    # Set special permissions for upload directories
+    - chmod 755 $DEPLOYPATH/forms/uploads
+    - chmod 755 $DEPLOYPATH/forms/uploads/resumes
+    - chmod 755 $DEPLOYPATH/forms/uploads/assessments
+    
+    # Create .htaccess files for upload security
+    - echo "Options -Indexes" > $DEPLOYPATH/forms/uploads/.htaccess
+    - echo "Deny from all" >> $DEPLOYPATH/forms/uploads/.htaccess
+    - echo "Options -Indexes" > $DEPLOYPATH/forms/uploads/resumes/.htaccess
+    - echo "Deny from all" >> $DEPLOYPATH/forms/uploads/resumes/.htaccess
+    - echo "Options -Indexes" > $DEPLOYPATH/forms/uploads/assessments/.htaccess
+    - echo "Deny from all" >> $DEPLOYPATH/forms/uploads/assessments/.htaccess
+    
+    # Secure configuration files
+    - chmod 600 $DEPLOYPATH/forms/config.php
+    
+    # Remove development files if they exist
+    - rm -f $DEPLOYPATH/README.md
+    - rm -f $DEPLOYPATH/deployment-guide.md
+    - rm -f $DEPLOYPATH/ci-cd-setup.md
+    - rm -f $DEPLOYPATH/pending_items.md
+    - rm -f $DEPLOYPATH/project_statusv1.md
+    
+    # Log successful deployment
+    - echo "$(date): Red-Knot Immigration website deployed successfully" >> $DEPLOYPATH/deployment.log

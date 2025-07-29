@@ -1,0 +1,117 @@
+name: Deploy Red-Knot Immigration to BigRock cPanel
+
+'on':
+  push:
+    branches: [ main ]
+    paths:
+      - 'docs/**'
+      - '.github/workflows/deploy.yml'
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: 🚀 Checkout code
+      uses: actions/checkout@v4
+      
+    - name: 🔧 Setup PHP
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: '8.1'
+        
+    - name: ✅ Validate PHP files
+      run: |
+        echo "Validating PHP syntax..."
+        find docs/forms -name "*.php" -exec php -l {} \;
+        if [ $? -eq 0 ]; then
+          echo "✅ All PHP files are valid"
+        else
+          echo "❌ PHP syntax errors found"
+          exit 1
+        fi
+        
+    - name: 🖼️ Optimize images (optional)
+      run: |
+        echo "Optimizing images for faster loading..."
+        # Note: Uncomment these lines if you want automatic image optimization
+        # sudo apt-get update
+        # sudo apt-get install -y jpegoptim optipng
+        # find docs/css/images -name "*.jpg" -exec jpegoptim --strip-all --max=85 {} \;
+        # find docs/css/images -name "*.png" -exec optipng -o2 {} \;
+        echo "Image optimization step ready (currently disabled)"
+        
+    - name: 🗂️ Prepare deployment files
+      run: |
+        echo "Preparing files for deployment..."
+        # Create deployment directory
+        mkdir -p deploy-files
+        
+        # Copy all docs content to deployment directory
+        cp -r docs/* deploy-files/
+        
+        # Ensure proper file permissions will be set
+        find deploy-files -type f -name "*.php" -exec chmod 644 {} \;
+        find deploy-files -type f -name "*.html" -exec chmod 644 {} \;
+        find deploy-files -type f -name "*.css" -exec chmod 644 {} \;
+        find deploy-files -type f -name "*.js" -exec chmod 644 {} \;
+        find deploy-files -type d -exec chmod 755 {} \;
+        
+        echo "Files prepared for deployment"
+        
+    - name: 📤 Deploy to BigRock cPanel via FTP
+      uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+      with:
+        server: ${{ secrets.FTP_HOST }}
+        username: ${{ secrets.FTP_USERNAME }}
+        password: ${{ secrets.FTP_PASSWORD }}
+        local-dir: ./deploy-files/
+        server-dir: public_html/
+        exclude: |
+          **/.git*
+          **/.git*/**
+          **/node_modules/**
+          **/.env*
+          **/README.md
+          **/deploy.md
+          **/ci-cd-setup.md
+          **/deployment-guide.md
+          **/pending_items.md
+          **/project_statusv1.md
+          **/.DS_Store
+          **/Thumbs.db
+          **/rate_limits.json
+          **/contact_log.txt
+          **/assessment_log.txt
+          **/career_applications_log.txt
+          **/error_log.txt
+          **/file_upload_log.txt
+          **/newsletter_subscribers.csv
+          
+    - name: 📋 Deployment Summary
+      run: |
+        echo "🎉 Deployment completed successfully!"
+        echo "📝 Deployment Details:"
+        echo "   • Repository: ${{ github.repository }}"
+        echo "   • Branch: ${{ github.ref_name }}"
+        echo "   • Commit: ${{ github.sha }}"
+        echo "   • Committed by: ${{ github.actor }}"
+        echo "   • Deployment time: $(date)"
+        echo ""
+        echo "🌐 Your website should now be updated at your BigRock hosting!"
+        echo ""
+        echo "🔍 Next steps:"
+        echo "   1. Visit your website to verify the deployment"
+        echo "   2. Test all forms to ensure they work correctly"
+        echo "   3. Check that file uploads are functioning"
+        echo "   4. Verify email delivery to info@redknot.ae"
+        
+    - name: 🚨 Notify on failure
+      if: failure()
+      run: |
+        echo "❌ Deployment failed!"
+        echo "Please check the following:"
+        echo "   • FTP credentials are correct in GitHub secrets"
+        echo "   • BigRock hosting is accessible"
+        echo "   • No PHP syntax errors in the code"
+        echo "   • File permissions are correct"
