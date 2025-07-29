@@ -766,3 +766,58 @@ Thank you!`;
   document.body.insertBefore(skipLink, document.body.firstChild);
 
 })(); 
+
+/**
+ * Lazy Loading Image Support
+ */
+document.addEventListener('DOMContentLoaded', function() {
+  // Add loaded class to lazy images when they load
+  const lazyImages = document.querySelectorAll('img[loading="lazy"]');
+  
+  lazyImages.forEach(img => {
+    if (img.complete) {
+      img.classList.add('loaded');
+    } else {
+      img.addEventListener('load', function() {
+        this.classList.add('loaded');
+      });
+    }
+  });
+
+  // Handle image error fallbacks
+  const images = document.querySelectorAll('img');
+  images.forEach(img => {
+    img.addEventListener('error', function() {
+      this.style.backgroundColor = '#f1f5f9';
+      this.style.color = '#64748b';
+      this.style.display = 'flex';
+      this.style.alignItems = 'center';
+      this.style.justifyContent = 'center';
+      this.innerHTML = 'Image not available';
+    });
+  });
+});
+
+/**
+ * Responsive Image Height Adjustments
+ */
+function adjustImageHeights() {
+  const countryImages = document.querySelectorAll('.country-image');
+  
+  countryImages.forEach(container => {
+    const img = container.querySelector('img');
+    if (img && window.innerWidth <= 576) {
+      container.style.height = '120px';
+    } else if (img && window.innerWidth <= 768) {
+      container.style.height = '160px';
+    } else if (img && window.innerWidth <= 991) {
+      container.style.height = '180px';
+    } else {
+      container.style.height = '200px';
+    }
+  });
+}
+
+// Run on load and resize
+window.addEventListener('load', adjustImageHeights);
+window.addEventListener('resize', adjustImageHeights); 
