@@ -9,7 +9,7 @@
 :root {
   /* Primary Brand Colors */
   --uae-blue: #0a4c96;          /* Trust, professionalism */
-  --uae-gold: #b68a35;          /* Success, prosperity */
+  --uae-gold: #e4b255;          /* Success, prosperity */
   --pure-white: #ffffff;        /* Cleanliness, fresh starts */
   --charcoal: #2d3748;          /* Primary text */
   
@@ -145,7 +145,7 @@ h1, h2, h3, h4, h5, h6 {
 .navbar .active,
 .navbar .active:focus,
 .navbar li:hover>a {
-  color: #b68a35;
+  color: #e4b255;
 }
 
 .navbar .getstarted,
@@ -424,7 +424,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .navbar-mobile ul li a:hover,
 .navbar-mobile ul li:hover > a {
-  color: #b68a35;
+  color: #e4b255;
   background: rgba(182, 138, 53, 0.15);
   transform: translateX(5px);
 }
@@ -483,7 +483,7 @@ h1, h2, h3, h4, h5, h6 {
 .navbar-mobile ul li.dropdown ul a:active,
 .navbar-mobile ul li.dropdown ul a:focus {
   background: rgba(182, 138, 53, 0.3) !important;
-  color: #b68a35 !important;
+  color: #e4b255 !important;
   transform: translateX(4px) !important;
   border-color: rgba(182, 138, 53, 0.5) !important;
 }
@@ -555,7 +555,7 @@ h1, h2, h3, h4, h5, h6 {
   transform: translateY(-50%);
   transition: transform 0.3s ease;
   font-size: 14px;
-  color: #b68a35;
+  color: #e4b255;
   background: rgba(182, 138, 53, 0.2);
   width: 24px;
   height: 24px;
@@ -641,7 +641,7 @@ h1, h2, h3, h4, h5, h6 {
   .mobile-nav-toggle:hover,
   .mobile-nav-toggle:focus {
     background: rgba(182, 138, 53, 0.25);
-    color: #b68a35;
+    color: #e4b255;
     border-color: rgba(182, 138, 53, 0.6);
     transform: scale(1.05);
   }
@@ -2552,15 +2552,20 @@ section {
 /* Improved accessibility and focus states */
 .navbar a:focus,
 .navbar .dropdown-toggle:focus {
-  outline: 2px solid #b68a35;
+  outline: 2px solid #e4b255;
   outline-offset: 2px;
 }
 
 .mobile-nav-toggle:focus {
-  outline: 2px solid #b68a35;
+  outline: 2px solid #e4b255;
   outline-offset: 2px;
 }
-
+.navbar a:focus:not(:focus-visible),
+.navbar .dropdown-toggle:focus:not(:focus-visible),
+.mobile-nav-toggle:focus:not(:focus-visible),
+.navbar .dropdown-menu a:focus:not(:focus-visible) {
+  outline: none !important;
+}
 /* Focus styles for keyboard navigation */
 a:focus,
 button:focus,
@@ -2575,7 +2580,7 @@ textarea:focus {
 @media (prefers-contrast: high) {
   :root {
     --uae-blue: #000080;
-    --uae-gold: #b8860b;
+    --uae-gold: #e4b255;
     --charcoal: #000000;
     --slate-600: #333333;
   }
@@ -3146,3 +3151,423 @@ textarea:focus {
   transform: translateY(-2px);
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
 } 
+
+/*--------------------------------------------------------------
+# Contact Page Styles
+--------------------------------------------------------------*/
+
+/* Contact Page Hero */
+.contact-hero {
+  padding: 140px 0 80px 0;
+  background: linear-gradient(135deg, var(--uae-blue) 0%, var(--uae-gold) 100%);
+  position: relative;
+}
+
+.contact-hero::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(45, 55, 72, 0.3);
+  z-index: 1;
+}
+
+.contact-hero .container {
+  position: relative;
+  z-index: 2;
+}
+
+.contact-hero h1 {
+  color: var(--pure-white);
+  font-size: 3rem;
+  font-weight: 700;
+  margin-bottom: 20px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.contact-hero .lead {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 1.25rem;
+  font-weight: 400;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+/* Office Locations Section */
+.office-locations {
+  padding: 80px 0;
+}
+
+.office-item {
+  background: var(--pure-white);
+  border-radius: 15px;
+  padding: 40px 30px;
+  height: 100%;
+  box-shadow: 0 10px 30px rgba(10, 76, 150, 0.1);
+  transition: all 0.3s ease;
+  border: 1px solid rgba(10, 76, 150, 0.1);
+}
+
+.office-item:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 20px 50px rgba(10, 76, 150, 0.15);
+  border-color: var(--uae-gold);
+}
+
+.office-flag {
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+.office-item h3 {
+  text-align: center;
+  color: var(--uae-blue);
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 30px;
+  position: relative;
+}
+
+.office-item h3::after {
+  content: "";
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 50px;
+  height: 3px;
+  background: linear-gradient(90deg, var(--uae-blue), var(--uae-gold));
+  border-radius: 2px;
+}
+
+.office-info {
+  space-y: 20px;
+}
+
+.info-row {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 20px;
+  padding: 15px;
+  background: rgba(10, 76, 150, 0.02);
+  border-radius: 8px;
+  border-left: 4px solid var(--uae-gold);
+}
+
+.info-row i {
+  color: var(--uae-blue);
+  font-size: 1.2rem;
+  margin-right: 15px;
+  margin-top: 3px;
+  min-width: 20px;
+}
+
+.info-row h5 {
+  color: var(--uae-blue);
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+
+.info-row p {
+  color: var(--slate-600);
+  font-size: 0.95rem;
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* Office CTA Section */
+.office-cta {
+  background: linear-gradient(135deg, rgba(10, 76, 150, 0.05), rgba(182, 138, 53, 0.05));
+  border-radius: 15px;
+  padding: 40px 30px;
+  border: 2px solid rgba(182, 138, 53, 0.2);
+}
+
+/* Contact Page Background */
+.contact-page-bg {
+  background: linear-gradient(180deg, rgba(241, 245, 249, 0.5) 0%, var(--pure-white) 100%);
+}
+
+/* Responsive Design for Contact Page */
+@media (max-width: 768px) {
+  .contact-hero {
+    padding: 120px 0 60px 0;
+  }
+  
+  .contact-hero h1 {
+    font-size: 2.5rem;
+  }
+  
+  .office-locations {
+    padding: 60px 0;
+  }
+  
+  .office-item {
+    padding: 30px 20px;
+    margin-bottom: 30px;
+  }
+  
+  .office-cta {
+    padding: 30px 20px;
+  }
+  
+  .info-row {
+    padding: 12px;
+  }
+}
+
+@media (max-width: 576px) {
+  .contact-hero h1 {
+    font-size: 2rem;
+  }
+  
+  .contact-hero .lead {
+    font-size: 1.1rem;
+  }
+  
+  .office-item h3 {
+    font-size: 1.3rem;
+  }
+  
+  .info-row {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .info-row i {
+    margin-right: 0;
+    margin-bottom: 8px;
+  }
+}
+
+/*--------------------------------------------------------------
+# Career Page Styles
+--------------------------------------------------------------*/
+
+/* Career Page Background */
+.careers-page-bg {
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  min-height: 100vh;
+}
+
+/* Career Hero Section */
+.careers-hero {
+  padding: 140px 0 80px;
+  background: linear-gradient(135deg, #0A4C96 0%, #2C3E50 100%);
+  color: white;
+  position: relative;
+  overflow: hidden;
+}
+
+.careers-hero::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.3);
+  z-index: 1;
+}
+
+.careers-hero .container {
+  position: relative;
+  z-index: 2;
+}
+
+.careers-hero h1 {
+  font-size: 3.5rem;
+  font-weight: 700;
+  margin-bottom: 20px;
+  color: #ffffff;
+  text-shadow: 0 0 15px rgba(182, 138, 53, 1), 2px 2px 4px rgba(0,0,0,0.5);
+}
+
+.careers-hero .lead {
+  font-size: 1.4rem;
+  margin-bottom: 0;
+  opacity: 0.9;
+}
+
+/* Careers Content Section */
+.careers-content {
+  padding: 80px 0;
+  background: #ffffff;
+}
+
+.careers-intro h2 {
+  color: #0A4C96;
+  font-size: 2.5rem;
+  font-weight: 600;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.careers-intro .lead {
+  font-size: 1.2rem;
+  color: #555;
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+/* Benefit Items */
+.benefit-item {
+  text-align: center;
+  padding: 30px 20px;
+  border-radius: 10px;
+  background: #f8f9fa;
+  margin-bottom: 30px;
+  transition: all 0.3s ease;
+  height: 100%;
+}
+
+.benefit-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(10, 76, 150, 0.15);
+  background: #ffffff;
+}
+
+.benefit-item i {
+  font-size: 3rem;
+  color: #B68A35;
+  margin-bottom: 20px;
+  display: block;
+}
+
+.benefit-item h4 {
+  color: #0A4C96;
+  font-size: 1.4rem;
+  font-weight: 600;
+  margin-bottom: 15px;
+}
+
+.benefit-item p {
+  color: #666;
+  font-size: 1rem;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* Career Application Section */
+.career-application {
+  padding: 80px 0;
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+}
+
+.career-application .section-header {
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.career-application .section-header h2 {
+  color: #0A4C96;
+  font-size: 2.5rem;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+.career-application .section-header p {
+  font-size: 1.2rem;
+  color: #666;
+  margin: 0;
+}
+
+/* Career Form Styles */
+.career-application .php-email-form {
+  background: #ffffff;
+  padding: 40px;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.career-application .form-group {
+  margin-bottom: 20px;
+}
+
+.career-application .form-control {
+  border: 2px solid #e9ecef;
+  border-radius: 8px;
+  padding: 12px 15px;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.career-application .form-control:focus {
+  border-color: #0A4C96;
+  box-shadow: 0 0 0 0.2rem rgba(10, 76, 150, 0.25);
+}
+
+.career-application select.form-control {
+  height: auto;
+  padding: 12px 15px;
+}
+
+.career-application textarea.form-control {
+  resize: vertical;
+  min-height: 120px;
+}
+
+.career-application .form-label {
+  font-weight: 500;
+  color: #0A4C96;
+  margin-bottom: 8px;
+  display: block;
+}
+
+.career-application button[type="submit"] {
+  background: linear-gradient(135deg, #0A4C96 0%, #2C3E50 100%);
+  color: white;
+  padding: 15px 40px;
+  border: none;
+  border-radius: 30px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.career-application button[type="submit"]:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(10, 76, 150, 0.3);
+}
+
+/* File Upload Styling */
+.career-application input[type="file"] {
+  border: 2px dashed #e9ecef;
+  padding: 20px;
+  border-radius: 8px;
+  background: #f8f9fa;
+  transition: all 0.3s ease;
+}
+
+.career-application input[type="file"]:hover {
+  border-color: #0A4C96;
+  background: #ffffff;
+}
+
+/* Responsive Design for Career Page */
+@media (max-width: 768px) {
+  .careers-hero h1 {
+    font-size: 2.5rem;
+  }
+  
+  .careers-hero .lead {
+    font-size: 1.2rem;
+  }
+  
+  .careers-intro h2 {
+    font-size: 2rem;
+  }
+  
+  .career-application .php-email-form {
+    padding: 30px 20px;
+  }
+  
+  .benefit-item {
+    margin-bottom: 20px;
+  }
+}

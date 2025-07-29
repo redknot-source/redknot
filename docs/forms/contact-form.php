@@ -50,6 +50,9 @@ switch ($form_type) {
     case 'newsletter':
         handle_newsletter_form();
         break;
+    case 'career':
+        handle_career_form();
+        break;
     default:
         header('Location: /error.html');
         exit();
@@ -252,5 +255,138 @@ function handle_newsletter_form() {
     
     header('Location: /thank-you.html?type=newsletter');
     exit();
+}
+
+function handle_career_form() {
+    // Career application form processing
+    $name = isset($_POST['name']) ? sanitize_input($_POST['name']) : '';
+    $email = isset($_POST['email']) ? sanitize_input($_POST['email']) : '';
+    $phone = isset($_POST['phone']) ? sanitize_input($_POST['phone']) : '';
+    $expertise = isset($_POST['expertise']) ? sanitize_input($_POST['expertise']) : '';
+    $location_preference = isset($_POST['location_preference']) ? sanitize_input($_POST['location_preference']) : '';
+    $cover_letter = isset($_POST['cover_letter']) ? sanitize_input($_POST['cover_letter']) : '';
+    $experience = isset($_POST['experience']) ? sanitize_input($_POST['experience']) : '';
+    
+    // Validation
+    $errors = [];
+    
+    if (empty($name)) {
+        $errors[] = 'Name is required';
+    }
+    
+    if (empty($email) || !validate_email($email)) {
+        $errors[] = 'Valid email is required';
+    }
+    
+    if (empty($phone)) {
+        $errors[] = 'Phone number is required';
+    }
+    
+    if (empty($expertise)) {
+        $errors[] = 'Expertise field is required';
+    }
+    
+    if (empty($cover_letter)) {
+        $errors[] = 'Cover letter is required';
+    }
+    
+    // If validation fails
+    if (!empty($errors)) {
+        $_SESSION['form_errors'] = $errors;
+        header('Location: /error.html');
+        exit();
+    }
+    
+    // Handle file upload
+    $resume_info = '';
+    if (isset($_FILES['resume']) && $_FILES['resume']['error'] === UPLOAD_ERR_OK) {
+        $upload_dir = 'uploads/resumes/';
+        if (!file_exists($upload_dir)) {
+            mkdir($upload_dir, 0755, true);
+        }
+        
+        $file_extension = pathinfo($_FILES['resume']['name'], PATHINFO_EXTENSION);
+        $allowed_extensions = ['pdf', 'doc', 'docx'];
+        
+        if (in_array(strtolower($file_extension), $allowed_extensions) && $_FILES['resume']['size'] <= 5 * 1024 * 1024) {
+            $new_filename = 'resume_' . $name . '_' . date('Y-m-d_H-i-s') . '.' . $file_extension;
+            $upload_path = $upload_dir . $new_filename;
+            
+            if (move_uploaded_file($_FILES['resume']['tmp_name'], $upload_path)) {
+                $resume_info = "Resume uploaded: " . $new_filename;
+            } else {
+                $resume_info = "Resume upload failed";
+            }
+        } else {
+            $resume_info = "Invalid resume file (only PDF, DOC, DOCX under 5MB allowed)";
+        }
+    } else {
+        $resume_info = "No resume uploaded";
+    }
+    
+    // Email configuration for career applications
+    $to = "careers@redknotconsulting.com";
+    $subject = "New Career Application - Red-Knot Consultants";
+    
+    $headers = "MIME-Version: 1.0\r\n";
+    $headers .= "Content-Type: text/html; charset=UTF-8\r\n";
+    $headers .= "From: careers@redknotconsulting.com\r\n";
+    $headers .= "Reply-To: " . $email . "\r\n";
+    
+    $email_body = "
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset='UTF-8'>
+        <title>New Career Application</title>
+        <style>
+            body { font-family: Arial, sans-serif; line-height: 1.6; }
+            .header { background-color: #0A4C96; color: white; padding: 20px; text-align: center; }
+            .content { padding: 20px; }
+            .field { margin-bottom: 15px; }
+            .field strong { color: #0A4C96; }
+            .footer { background-color: #f4f4f4; padding: 15px; text-align: center; font-size: 12px; }
+        </style>
+    </head>
+    <body>
+        <div class='header'>
+            <h2>New Career Application</h2>
+        </div>
+        <div class='content'>
+            <div class='field'><strong>Name:</strong> {$name}</div>
+            <div class='field'><strong>Email:</strong> {$email}</div>
+            <div class='field'><strong>Phone:</strong> {$phone}</div>
+            <div class='field'><strong>Expertise:</strong> {$expertise}</div>
+            <div class='field'><strong>Location Preference:</strong> {$location_preference}</div>
+            <div class='field'><strong>Cover Letter:</strong><br>" . nl2br($cover_letter) . "</div>
+            <div class='field'><strong>Experience:</strong><br>" . nl2br($experience) . "</div>
+            <div class='field'><strong>Resume:</strong> {$resume_info}</div>
+            <div class='field'><strong>Application Time:</strong> " . date('Y-m-d H:i:s T') . "</div>
+            <div class='field'><strong>IP Address:</strong> " . $_SERVER['REMOTE_ADDR'] . "</div>
+        </div>
+        <div class='footer'>
+            <p>This career application was submitted through the Red-Knot Consultants website.</p>
+        </div>
+    </body>
+    </html>
+    ";
+    
+    if (mail($to, $subject, $email_body, $headers)) {
+        // Log successful submission
+        $log_entry = date('Y-m-d H:i:s') . " - Career application submitted by: $name ($email) - $expertise\n";
+        file_put_contents('career_applications_log.txt', $log_entry, FILE_APPEND | LOCK_EX);
+        
+        // Redirect to success page
+        header('Location: /thank-you.html?type=career');
+        exit();
+    } else {
+        // Log error
+        $error_log = date('Y-m-d H:i:s') . " - Career application email failed for: $name ($email)\n";
+        file_put_contents('error_log.txt', $error_log, FILE_APPEND | LOCK_EX);
+        
+        // Redirect to error page
+        header('Location: /error.html?type=career');
+        exit();
+    }
 }
 ?> 
