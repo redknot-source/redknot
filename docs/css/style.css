@@ -3242,7 +3242,9 @@ textarea:focus {
 }
 
 .office-info {
-  space-y: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
 .info-row {
