@@ -4513,3 +4513,30 @@ img:not([class*="object-fit"]):not(.img-cover):not(.img-contain) {
     overflow: hidden;
   }
 }
+
+/* Specific class overrides for skilled migration, work permits, and study abroad pages */
+.skilled-migration-page-bg .combined-header.text-center.aos-init.aos-animate {
+  margin-bottom: 0px !important;
+  padding-bottom: 0px !important;
+}
+
+.work-permits-page-bg .combined-header.text-center.aos-init.aos-animate {
+  margin-bottom: 0px !important;
+  padding-bottom: 0px !important;
+}
+
+.study-abroad-page-bg .combined-header.text-center.aos-init.aos-animate {
+  margin-bottom: 0px !important;
+  padding-bottom: 0px !important;
+}
+
+/* Achttien.io Credit Styling */
+.col-md-6.text-md-end a {
+  color: var(--uae-gold) !important;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.col-md-6.text-md-end a:hover {
+  color: white !important;
+}
