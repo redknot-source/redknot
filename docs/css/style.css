@@ -91,6 +91,8 @@ h1, h2, h3, h4, h5, h6 {
   max-height: 90px;
   margin-right: 8px;
   border-radius: 4px;
+  object-fit: contain;
+  width: auto;
 }
 
 .header .logo span {
@@ -1414,11 +1416,11 @@ section {
 }
 
 .testimonial-img {
-  width: 60px;
-  height: 60px;
+  width: 80px;
+  height: 80px;
   border-radius: 50%;
-  margin-right: 15px;
   object-fit: cover;
+  border: 3px solid var(--uae-gold);
 }
 
 .testimonials h3 {
@@ -2917,6 +2919,12 @@ textarea:focus {
   position: relative;
   color: var(--slate-600);
   line-height: 1.6;
+  border-bottom: 1px solid rgba(10, 76, 150, 0.1);
+}
+
+.benefits-list li:last-child,
+.eligibility-list li:last-child {
+  border-bottom: none;
 }
 
 .benefits-list li::before {
@@ -3006,7 +3014,7 @@ textarea:focus {
 .footer-logo {
   max-width: 120px;
   height: auto;
-  margin-bottom: 15px;
+  object-fit: contain;
 }
 
 /* Mobile Responsive Design */
@@ -3696,8 +3704,10 @@ textarea:focus {
 
 .country-image {
   position: relative;
+  width: 100%;
   height: 200px;
   overflow: hidden;
+  border-radius: 8px 8px 0 0;
 }
 
 .country-image img {
@@ -3832,12 +3842,13 @@ textarea:focus {
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
 }
 
-.benefits-list {
+/* Tourist visa page specific benefits-list styling */
+.tourist-visa-page-bg .benefits-list {
   list-style: none;
   padding: 0;
 }
 
-.benefits-list li {
+.tourist-visa-page-bg .benefits-list li {
   padding: 12px 0;
   border-bottom: 1px solid rgba(255, 255, 255, 0.2);
   position: relative;
@@ -3846,7 +3857,7 @@ textarea:focus {
   line-height: 1.6;
 }
 
-.benefits-list li:before {
+.tourist-visa-page-bg .benefits-list li:before {
   content: '✓';
   position: absolute;
   left: 0;
@@ -3856,11 +3867,11 @@ textarea:focus {
   font-size: 1.1rem;
 }
 
-.benefits-list li:last-child {
+.tourist-visa-page-bg .benefits-list li:last-child {
   border-bottom: none;
 }
 
-.benefits-list li strong {
+.tourist-visa-page-bg .benefits-list li strong {
   color: var(--uae-gold) !important;
 }
 
@@ -4047,3 +4058,460 @@ textarea:focus {
 .country-card:nth-child(6) { animation-delay: 0.3s; }
 .country-card:nth-child(7) { animation-delay: 0.35s; }
 .country-card:nth-child(8) { animation-delay: 0.4s; }
+
+/*--------------------------------------------------------------
+# Responsive Image Optimizations
+--------------------------------------------------------------*/
+
+/* General responsive image utilities */
+.img-responsive {
+  max-width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+.img-contain {
+  object-fit: contain;
+}
+
+.img-cover {
+  object-fit: cover;
+}
+
+/* Aspect ratio containers for consistent image display */
+.aspect-ratio-16x9 {
+  position: relative;
+  width: 100%;
+  height: 0;
+  padding-bottom: 56.25%; /* 16:9 aspect ratio */
+  overflow: hidden;
+}
+
+.aspect-ratio-4x3 {
+  position: relative;
+  width: 100%;
+  height: 0;
+  padding-bottom: 75%; /* 4:3 aspect ratio */
+  overflow: hidden;
+}
+
+.aspect-ratio-1x1 {
+  position: relative;
+  width: 100%;
+  height: 0;
+  padding-bottom: 100%; /* 1:1 aspect ratio */
+  overflow: hidden;
+}
+
+.aspect-ratio-16x9 img,
+.aspect-ratio-4x3 img,
+.aspect-ratio-1x1 img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Enhanced country image containers */
+.country-image {
+  position: relative;
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+  border-radius: 8px 8px 0 0;
+}
+
+/* Logo optimizations */
+.header .logo img {
+  max-height: 90px;
+  margin-right: 8px;
+  border-radius: 4px;
+  object-fit: contain;
+  width: auto;
+}
+
+/* Footer logo */
+.footer-logo {
+  max-width: 120px;
+  height: auto;
+  object-fit: contain;
+}
+
+/* Testimonial image optimizations */
+.testimonial-img {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid var(--uae-gold);
+}
+
+/* Background image improvements */
+.bg-responsive {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/* Hero section background optimizations */
+.hero-bg-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1;
+}
+
+/*--------------------------------------------------------------
+# Mobile Responsive Image Fixes
+--------------------------------------------------------------*/
+
+/* Tablet optimizations */
+@media (max-width: 991px) {
+  .country-image {
+    height: 180px;
+  }
+  
+  .header .logo img {
+    max-height: 60px;
+  }
+  
+  /* Background image adjustments for better mobile viewing */
+  .about-intro {
+    background-attachment: scroll;
+    background-position: center center;
+  }
+  
+  /* Adjust hero backgrounds for tablet */
+  .hero-content {
+    background-position: center center;
+  }
+}
+
+/* Mobile landscape optimizations */
+@media (max-width: 768px) {
+  .country-image {
+    height: 160px;
+  }
+  
+  .header .logo img {
+    max-height: 50px;
+  }
+  
+  /* Optimize background images for mobile */
+  .about-intro,
+  .tourist-visa-page-bg,
+  .combined-header {
+    background-attachment: scroll;
+    background-position: center top;
+    background-size: cover;
+  }
+  
+  /* Improve aspect ratios for mobile */
+  .aspect-ratio-16x9 {
+    padding-bottom: 66.67%; /* Adjust for mobile viewing */
+  }
+  
+  .testimonial-img {
+    width: 60px;
+    height: 60px;
+  }
+}
+
+/* Mobile portrait optimizations */
+@media (max-width: 576px) {
+  .country-image {
+    height: 140px;
+  }
+  
+  .header .logo img {
+    max-height: 35px;
+  }
+  
+  /* Optimize for small screens */
+  .aspect-ratio-16x9 {
+    padding-bottom: 75%; /* More square ratio for very small screens */
+  }
+  
+  .footer-logo {
+    max-width: 100px;
+  }
+  
+  .testimonial-img {
+    width: 50px;
+    height: 50px;
+  }
+  
+  /* Background position adjustments for mobile */
+  .about-intro {
+    background-position: center 20%;
+  }
+  
+  /* Hero background improvements */
+  .hero-content {
+    min-height: 80vh;
+    background-position: center center;
+  }
+}
+
+/* Very small screens */
+@media (max-width: 480px) {
+  .country-image {
+    height: 120px;
+  }
+  
+  .header .logo img {
+    max-height: 30px;
+  }
+}
+
+/*--------------------------------------------------------------
+# Image Loading and Performance Optimizations
+--------------------------------------------------------------*/
+
+/* Smooth image loading */
+img {
+  transition: opacity 0.3s ease;
+}
+
+img[loading="lazy"] {
+  opacity: 0;
+}
+
+img[loading="lazy"].loaded {
+  opacity: 1;
+}
+
+/* Prevent layout shift during image loading */
+.img-placeholder {
+  background-color: #f1f5f9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #64748b;
+  font-size: 0.875rem;
+}
+
+/* High DPI display optimizations */
+@media only screen and (-webkit-min-device-pixel-ratio: 2),
+       only screen and (min--moz-device-pixel-ratio: 2),
+       only screen and (-o-min-device-pixel-ratio: 2/1),
+       only screen and (min-device-pixel-ratio: 2),
+       only screen and (min-resolution: 192dpi),
+       only screen and (min-resolution: 2dppx) {
+  
+  /* Optimize images for retina displays */
+  .country-image img,
+  .header .logo img,
+  .footer-logo {
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+  }
+}
+
+/*--------------------------------------------------------------
+# Specific Component Image Fixes
+--------------------------------------------------------------*/
+
+/* Study abroad page image fix */
+.study-destination img {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+@media (max-width: 768px) {
+  .study-destination img {
+    height: 200px;
+  }
+}
+
+@media (max-width: 576px) {
+  .study-destination img {
+    height: 150px;
+  }
+}
+
+/* Service card image optimizations */
+.service-image {
+  position: relative;
+  overflow: hidden;
+  border-radius: 8px;
+}
+
+.service-image img {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.service-image:hover img {
+  transform: scale(1.05);
+}
+
+@media (max-width: 768px) {
+  .service-image img {
+    height: 200px;
+  }
+}
+
+/* Gallery image optimizations */
+.gallery-item {
+  position: relative;
+  overflow: hidden;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+.gallery-item img {
+  width: 100%;
+  height: auto;
+  min-height: 200px;
+  object-fit: cover;
+  transition: all 0.3s ease;
+}
+
+@media (max-width: 768px) {
+  .gallery-item img {
+    min-height: 150px;
+  }
+}
+
+/*--------------------------------------------------------------
+# Background Image Responsive Improvements
+--------------------------------------------------------------*/
+
+/* Enhanced background image handling */
+.hero-section-bg,
+.about-intro,
+.tourist-visa-page-bg,
+.combined-header,
+.contact-hero,
+.careers-hero {
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+/* Mobile-specific background adjustments */
+@media (max-width: 768px) {
+  .hero-section-bg,
+  .about-intro,
+  .tourist-visa-page-bg,
+  .combined-header,
+  .contact-hero,
+  .careers-hero {
+    background-attachment: scroll;
+    background-position: center top;
+  }
+  
+  /* Specific background position adjustments for mobile */
+  .about-intro {
+    background-position: center 30%;
+  }
+  
+  .tourist-visa-page-bg {
+    background-position: center 40%;
+  }
+  
+  .contact-hero {
+    background-position: center 25%;
+  }
+  
+  .careers-hero {
+    background-position: center 35%;
+  }
+}
+
+/* Small mobile adjustments */
+@media (max-width: 576px) {
+  .hero-section-bg,
+  .about-intro,
+  .tourist-visa-page-bg,
+  .combined-header,
+  .contact-hero,
+  .careers-hero {
+    background-position: center 20%;
+  }
+}
+
+/*--------------------------------------------------------------
+# Legacy Image Class Overrides and Fallbacks
+--------------------------------------------------------------*/
+
+/* Ensure compatibility with existing img-fluid classes */
+.img-fluid {
+  max-width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+/* Enhanced responsive image base class */
+.img-responsive {
+  max-width: 100%;
+  height: auto;
+  object-fit: cover;
+  transition: all 0.3s ease;
+}
+
+/* Prevent images from being stretched */
+img:not([class*="object-fit"]):not(.img-cover):not(.img-contain) {
+  object-fit: cover;
+}
+
+/* Fix for images in cards that might overflow */
+.card img,
+.country-card img,
+.service-card img {
+  object-fit: cover;
+  width: 100%;
+}
+
+/* Ensure proper aspect ratios on mobile */
+@media (max-width: 767px) {
+  .img-responsive {
+    border-radius: 4px;
+  }
+  
+  /* Prevent very tall images on mobile */
+  .country-image img,
+  .service-image img,
+  .study-destination img {
+    max-height: 300px;
+    object-fit: cover;
+  }
+}
+
+/*--------------------------------------------------------------
+# Browser-specific Image Fixes
+--------------------------------------------------------------*/
+
+/* Safari-specific fixes */
+@supports (-webkit-appearance:none) {
+  .img-responsive,
+  .country-image img,
+  .service-image img {
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+  }
+}
+
+/* Internet Explorer fallbacks */
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+  .img-responsive {
+    width: 100%;
+    max-width: 100%;
+  }
+  
+  .country-image {
+    display: block;
+    overflow: hidden;
+  }
+}
