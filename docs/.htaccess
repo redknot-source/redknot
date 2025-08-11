@@ -1,6 +1,6 @@
 # Red-Knot Immigration Website - BigRock Hosting Configuration
 
-# Enable rewrite engine
+# Basic Error Handling and Security
 RewriteEngine On
 
 # Security Headers
@@ -12,7 +12,7 @@ RewriteEngine On
     Header always set Permissions-Policy "geolocation=(), microphone=(), camera=()"
 </IfModule>
 
-# PHP Configuration
+# PHP Configuration (only if allowed by hosting provider)
 <IfModule mod_php.c>
     php_value upload_max_filesize "5M"
     php_value post_max_size "10M"
@@ -21,20 +21,14 @@ RewriteEngine On
     php_value memory_limit "64M"
 </IfModule>
 
-# File Upload Security
-<FilesMatch "\.(php|pl|py|jsp|asp|sh|cgi)$">
-    <IfModule mod_dir.c>
-        DirectoryIndex disabled
-    </IfModule>
-</FilesMatch>
-
 # Protect sensitive files
 <Files ~ "^(config\.php|\.env|\.htaccess|\.htpasswd|error_log|access_log|rate_limits\.json)$">
-    Order allow,deny
-    Deny from all
-</FilesMatch>
+    <RequireAll>
+        Require all denied
+    </RequireAll>
+</Files>
 
-# Protect upload directories
+# Protect upload directories from script execution
 <IfModule mod_rewrite.c>
     RewriteRule ^uploads/.*\.(php|pl|py|jsp|asp|sh|cgi)$ - [F,L]
 </IfModule>
@@ -71,12 +65,9 @@ RewriteEngine On
     ExpiresByType text/html "access plus 1 week"
 </IfModule>
 
-# Remove server signature
-ServerTokens Prod
-
-# Redirect HTTP to HTTPS (uncomment when SSL is configured)
-# RewriteCond %{HTTPS} off
-# RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+# HTTPS Redirect (SSL is working)
+RewriteCond %{HTTPS} off
+RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 
 # Custom Error Pages
 ErrorDocument 404 /error.html
@@ -90,16 +81,7 @@ RewriteRule ^([^.]+)$ $1.html [NC,L]
 
 # Prevent access to backup files
 <FilesMatch "(\.(bak|config|dist|fla|inc|ini|log|psd|sh|sql|swp)|~)$">
-    Order allow,deny
-    Deny from all
-</FilesMatch>
-
-# Rate limiting for form submissions (basic)
-<IfModule mod_evasive.c>
-    DOSHashTableSize    10000
-    DOSPageCount        5
-    DOSPageInterval     1
-    DOSSiteCount        50
-    DOSSiteInterval     1
-    DOSBlockingPeriod   600
-</IfModule> 
+    <RequireAll>
+        Require all denied
+    </RequireAll>
+</FilesMatch> 

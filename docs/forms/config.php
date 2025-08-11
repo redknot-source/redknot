@@ -5,7 +5,7 @@
  */
 
 // Email Configuration
-define('ADMIN_EMAIL', 'info@redknot.ae');
+define('ADMIN_EMAIL', 'info@redknot.ae,redknotconsultantsuae@gmail.com');
 define('FROM_EMAIL', 'noreply@redknot.ae');
 define('SITE_NAME', 'Red-Knot Immigration');
 

@@ -214,13 +214,13 @@ function handle_assessment_form() {
         exit();
     }
     
-    // Handle resume upload
+    // Handle resume upload (now optional)
     $resume_info = '';
-    if (isset($_FILES['resume'])) {
+    if (isset($_FILES['resume']) && $_FILES['resume']['error'] !== UPLOAD_ERR_NO_FILE) {
         $upload_result = FileHandler::handle_upload($_FILES['resume'], 'assessment', $name);
         $resume_info = FileHandler::get_file_info($upload_result);
     } else {
-        $resume_info = "No resume uploaded";
+        $resume_info = "No resume uploaded (optional)";
     }
     
     // Email configuration for assessment

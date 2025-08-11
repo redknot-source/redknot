@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test Form</title>
+</head>
+<body>
+    <h2>Simple Test Form</h2>
+    <form action="forms/test-handler.php" method="POST">
+        <input type="hidden" name="form_type" value="test">
+        <p>
+            <label>Name:</label><br>
+            <input type="text" name="name" value="Test User" required>
+        </p>
+        <p>
+            <label>Email:</label><br>
+            <input type="email" name="email" value="test@example.com" required>
+        </p>
+        <p>
+            <input type="submit" value="Test Submit">
+        </p>
+    </form>
+</body>
+</html>

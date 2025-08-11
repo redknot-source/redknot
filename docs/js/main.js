@@ -405,7 +405,7 @@ Thank you!`;
         
         // Optional: Send to WhatsApp
         const encodedMessage = encodeURIComponent(whatsappMessage);
-        const whatsappUrl = `https://wa.me/+971XXXXXXXXX?text=${encodedMessage}`;
+        const whatsappUrl = `https://wa.me/+971505808944?text=${encodedMessage}`;
         
         // You can uncomment the line below to auto-open WhatsApp
         // window.open(whatsappUrl, '_blank');
@@ -461,7 +461,7 @@ Thank you!`;
         </div>
         
         <div class="action-buttons text-center mt-4">
-          <a href="https://wa.me/+971XXXXXXXXX?text=Hi, I just submitted my application for ${data.preferred_country}. My name is ${data.name}. When can we discuss the next steps?" 
+          <a href="https://wa.me/+971505808944?text=Hi, I just submitted my application for ${data.preferred_country}. My name is ${data.name}. When can we discuss the next steps?" 
              class="btn btn-success btn-lg me-3">
             <i class="fab fa-whatsapp"></i> Chat on WhatsApp
           </a>
@@ -574,7 +574,7 @@ Thank you!`;
         <hr>
         <p class="mb-0">
           For immediate assistance, you can also contact us on 
-          <a href="https://wa.me/971XXXXXXXXX" class="alert-link">WhatsApp</a>.
+          <a href="https://wa.me/971505808944" class="alert-link">WhatsApp</a>.
         </p>
       </div>
     `;
@@ -700,7 +700,7 @@ Thank you!`;
   phoneInputs.forEach(input => {
     input.addEventListener('focus', function() {
       if (this.value === '') {
-        this.value = '+91'; // Default to India, most common for Dubai immigration
+        this.value = '+971'; // Default to UAE
       }
     });
   });
